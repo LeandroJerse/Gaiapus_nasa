@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atlas agrícola | Gaiapus</title>
+<style>
+:root{color-scheme:dark;font:16px system-ui;background:#101b28;color:#eef0ea}
+body{max-width:1160px;margin:auto;padding:clamp(1rem,4vw,3rem)}
+h1{font:normal clamp(2.4rem,7vw,4.5rem) Georgia;margin:.2em 0}
+p{color:#bbc9d0;line-height:1.55}a{color:#aee6cb}
+.controls{display:flex;flex-wrap:wrap;gap:1rem;margin:1.5rem 0}
+label{display:grid;gap:.35rem}select{font:inherit;padding:.45em;background:#203144;color:inherit;border:1px solid #7690a4;border-radius:6px;max-width:90vw}
+.layout{display:grid;grid-template-columns:minmax(0,2fr) minmax(15rem,1fr);gap:1rem}
+.panel{background:#182636;border:1px solid #304455;border-radius:12px;padding:1rem;overflow:auto}
+svg{display:block;width:100%;max-height:64vh}path{stroke:#172536;stroke-width:.65;vector-effect:non-scaling-stroke;fill-rule:evenodd}
+path[data-code]:not([data-code=""]){cursor:pointer}path:hover,path.selected{stroke:#fff;stroke-width:2}
+table{border-collapse:collapse;width:100%;font-size:.92rem}th,td{text-align:left;padding:.5em;border-bottom:1px solid #3c4c59}th:last-child,td:last-child{text-align:right}
+.legend{display:flex;flex-wrap:wrap;gap:.5rem 1rem;font-size:.8rem;padding:.6rem 0}
+.swatch{display:inline-block;width:.8em;height:.8em;margin-right:.35em;border-radius:2px}
+@media(max-width:760px){.layout{grid-template-columns:1fr}}
+</style>
+<body>
+<header><p>GAIAPUS · DADOS DE 2024</p><h1>Atlas agrícola</h1>
+<p>Compare cultivos por área colhida ou valor bruto da produção. Escolha uma região ou clique no mapa.</p></header>
+<div class="controls">
+<label>Mapa<select id="view"><option value="world">Mundo · países e regiões FAO</option><option value="regions">Brasil · cinco regiões</option><option value="states">Brasil · 27 UFs</option><option value="cities">Brasil · municípios piloto</option></select></label>
+<label>Indicador<select id="metric"><option value="area">Área colhida (ha)</option><option value="value">Valor bruto da produção</option></select></label>
+<label>Local<select id="place"></select></label>
+</div>
+<main class="layout">
+<section class="panel">
+<div data-map="world"><!-- WORLD --></div><div data-map="regions" hidden><!-- REGIONS --></div><div data-map="states" hidden><!-- STATES --></div>
+<div data-map="cities" hidden><p>Selecione Uberlândia, Rio Verde ou Barreiras no menu Local.</p></div>
+<div class="legend" id="legend"></div></section>
+<section class="panel"><h2 id="heading" aria-live="polite"></h2><p id="units"></p><table><thead><tr><th>Cultivo</th><th>Valor</th></tr></thead><tbody id="ranking"></tbody></table></section>
+</main>
+<footer><p>Valor bruto da produção é anterior aos custos. Valores brasileiros são em mil R$. A série FAOSTAT está em mil dólares internacionais constantes de 2014–2016, usados para comparações estatísticas. Os rankings têm cobertura variável.</p>
+<p><a href="https://www.fao.org/faostat/">FAOSTAT QCL e QV</a> · <a href="https://sidra.ibge.gov.br/tabela/5457">IBGE PAM</a> · <a href="https://www.naturalearthdata.com/">Natural Earth</a></p></footer>
+<script>
+const data = /* DATA */;
+const colors = {"Soja":"#63b494","Milho":"#e9ba68","Café verde":"#db957a","Trigo":"#dbabdb","Arroz":"#88bded","Cana-de-açúcar":"#afd973"};
+const view = document.querySelector('#view'), metric = document.querySelector('#metric'), place = document.querySelector('#place');
+const chartNumber = new Intl.NumberFormat('pt-BR',{maximumFractionDigits:0});
+function color(row) {
+  if (!row) return '#344257';
+  const normalized = row.crop.replace(/ \(em grão\).*/, '');
+  return colors[normalized === 'Café' ? 'Café verde' : normalized] || '#a39bc6';
+}
+function display() {
+  const scope = view.value === 'world' ? 'world' : 'br';
+  const current = data[scope][place.value];
+  const key = metric.value === 'area' ? 'area_ha' : scope === 'world' ? 'gross_kint' : 'gross_kbrl';
+  document.querySelector('#heading').textContent = current?.name || 'Sem dados';
+  document.querySelector('#units').textContent = metric.value === 'area' ? 'Área colhida em hectares' :
+    scope === 'world' ? 'Mil dólares internacionais constantes de 2014–2016' : 'Mil reais em 2024';
+  const body = document.querySelector('#ranking');
+  body.replaceChildren();
+  for (const row of current?.[metric.value] || []) {
+    const tr = body.insertRow();
+    tr.insertCell().textContent = row.crop;
+    tr.insertCell().textContent = chartNumber.format(row[key]);
+  }
+  if (!body.rows.length) body.insertRow().insertCell().textContent = 'Sem dados para o indicador';
+  document.querySelectorAll('path[data-code]').forEach(path => {
+    const loc = data[path.dataset.scope][path.dataset.code];
+    path.classList.toggle('selected', path.dataset.scope === scope && path.dataset.code === place.value);
+    path.setAttribute('fill', color(loc?.[metric.value][0]));
+    path.querySelector('title').textContent = loc ?
+      loc.name + ' · ' + (loc[metric.value][0]?.crop || 'Sem dados') : 'Sem dados';
+  });
+}
+function switchMap() {
+  const mode = view.value;
+  const scope = mode === 'world' ? 'world' : 'br';
+  const prefix = {regions:'n2:', states:'n3:', cities:'n6:'}[mode];
+  const choices = Object.entries(data[scope]).filter(([id]) => !prefix || id.startsWith(prefix));
+  choices.sort((a,b) => a[1].name.localeCompare(b[1].name, 'pt-BR'));
+  place.replaceChildren(...choices.map(([id,item])=>new Option(item.name,id)));
+  const defaultId = {world:'5000',regions:'n2:3',states:'n3:31',cities:'n6:3170206'}[mode];
+  if (data[scope][defaultId]) place.value = defaultId;
+  document.querySelectorAll('[data-map]').forEach(el => { el.hidden = el.dataset.map !== mode; });
+  display();
+}
+view.addEventListener('change',switchMap);
+place.addEventListener('change',display);
+metric.addEventListener('change',display);
+document.querySelector('main').addEventListener('click',event => {
+  const path = event.target.closest('path[data-code]');
+  if (path?.dataset.code) {place.value = path.dataset.code; display();}
+});
+for (const [name,fill] of Object.entries({...colors,'Outros':'#a39bc6','Sem dados':'#344257'})) {
+  const item = document.createElement('span');
+  const swatch = document.createElement('i');
+  swatch.className = 'swatch';
+  swatch.style.background = fill;
+  item.append(swatch,name);
+  document.querySelector('#legend').append(item);
+}
+switchMap();
+</script>
+</body>
+</html>

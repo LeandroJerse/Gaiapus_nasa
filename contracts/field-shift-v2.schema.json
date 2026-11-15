@@ -1,0 +1,1053 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://gaiapus.local/contracts/field-shift-v2.schema.json",
+  "title": "Gaiapus Field Shift strategies (v2 summary)",
+  "description": "Simulated water and soil-presence indicators of three historical management strategies in one municipality, with paired differences and a rain sensitivity test. No yield effect. Absent maize is null, never zero. The v1 contract (field-shift.schema.json) stays valid for the v1 publication.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "product",
+    "package_id",
+    "municipality_code",
+    "simulated",
+    "reference_scenario",
+    "reference_note",
+    "sowing",
+    "weather",
+    "soil",
+    "hypotheses",
+    "windows",
+    "indicator_definitions",
+    "scenarios",
+    "comparisons",
+    "comparisons_note",
+    "sensitivity",
+    "not_simulated",
+    "yield_effect",
+    "evidence"
+  ],
+  "$defs": {
+    "mean": {
+      "type": "object",
+      "required": [
+        "covered_days",
+        "off_season_water_use_mm",
+        "off_season_drainage_mm",
+        "storage_at_next_sowing_mm",
+        "soy_deficit_mm",
+        "maize_deficit_mm",
+        "maize_stress_days",
+        "next_soy_establishment_deficit_mm",
+        "bare_days",
+        "off_season_days",
+        "soy_stress_days",
+        "year_days",
+        "year_rain_mm",
+        "year_water_use_mm",
+        "year_drainage_mm",
+        "post_soy_days",
+        "post_soy_water_use_mm",
+        "post_soy_drainage_mm"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "covered_days": {
+          "type": "number",
+          "minimum": 0
+        },
+        "off_season_water_use_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "off_season_drainage_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "storage_at_next_sowing_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "soy_deficit_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "maize_deficit_mm": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "maize_stress_days": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "next_soy_establishment_deficit_mm": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "bare_days": {
+          "type": "number",
+          "minimum": 0
+        },
+        "off_season_days": {
+          "type": "number",
+          "minimum": 0
+        },
+        "soy_stress_days": {
+          "type": "number",
+          "minimum": 0
+        },
+        "year_days": {
+          "type": "number",
+          "minimum": 0
+        },
+        "year_rain_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "year_water_use_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "year_drainage_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "post_soy_days": {
+          "type": "number",
+          "minimum": 0
+        },
+        "post_soy_water_use_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "post_soy_drainage_mm": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    },
+    "year": {
+      "type": "object",
+      "required": [
+        "agricultural_year",
+        "soy_sowing",
+        "maize_sowing",
+        "next_soy_sowing",
+        "maize_status",
+        "next_soy_establishment_status",
+        "covered_days",
+        "off_season_water_use_mm",
+        "off_season_drainage_mm",
+        "storage_at_next_sowing_mm",
+        "soy_deficit_mm",
+        "maize_deficit_mm",
+        "maize_stress_days",
+        "next_soy_establishment_deficit_mm",
+        "bare_days",
+        "off_season_days",
+        "soy_stress_days",
+        "year_days",
+        "year_rain_mm",
+        "year_water_use_mm",
+        "year_drainage_mm",
+        "post_soy_days",
+        "post_soy_water_use_mm",
+        "post_soy_drainage_mm"
+      ],
+      "properties": {
+        "agricultural_year": {
+          "type": "string",
+          "pattern": "^[0-9]{4}/[0-9]{4}$"
+        },
+        "soy_sowing": {
+          "type": "string"
+        },
+        "maize_sowing": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "next_soy_sowing": {
+          "type": "string"
+        },
+        "maize_status": {
+          "enum": [
+            "grown",
+            "not_grown"
+          ]
+        },
+        "next_soy_establishment_status": {
+          "enum": [
+            "ok",
+            "next_season_not_simulated"
+          ]
+        },
+        "covered_days": {
+          "type": "number",
+          "minimum": 0
+        },
+        "off_season_water_use_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "off_season_drainage_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "storage_at_next_sowing_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "soy_deficit_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "maize_deficit_mm": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "maize_stress_days": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "next_soy_establishment_deficit_mm": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "bare_days": {
+          "type": "number",
+          "minimum": 0
+        },
+        "off_season_days": {
+          "type": "number",
+          "minimum": 0
+        },
+        "soy_stress_days": {
+          "type": "number",
+          "minimum": 0
+        },
+        "year_days": {
+          "type": "number",
+          "minimum": 0
+        },
+        "year_rain_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "year_water_use_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "year_drainage_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "post_soy_days": {
+          "type": "number",
+          "minimum": 0
+        },
+        "post_soy_water_use_mm": {
+          "type": "number",
+          "minimum": 0
+        },
+        "post_soy_drainage_mm": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "maize_status": {
+                "const": "not_grown"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "maize_sowing": {
+                "type": "null"
+              },
+              "maize_deficit_mm": {
+                "type": "null"
+              },
+              "maize_stress_days": {
+                "type": "null"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "maize_sowing": {
+                "type": "string"
+              },
+              "maize_deficit_mm": {
+                "type": "number"
+              },
+              "maize_stress_days": {
+                "type": "number"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "stat": {
+      "type": "object",
+      "required": [
+        "n",
+        "mean",
+        "min",
+        "max",
+        "years",
+        "status"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "n": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mean": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "min": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "max": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "years": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "enum": [
+            "ok",
+            "not_applicable"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "n": {
+                "const": 0
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "mean": {
+                "type": "null"
+              },
+              "status": {
+                "const": "not_applicable"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "mean": {
+                "type": "number"
+              },
+              "status": {
+                "const": "ok"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "comparison": {
+      "type": "object",
+      "required": [
+        "covered_days",
+        "off_season_water_use_mm",
+        "off_season_drainage_mm",
+        "storage_at_next_sowing_mm",
+        "soy_deficit_mm",
+        "maize_deficit_mm",
+        "maize_stress_days",
+        "next_soy_establishment_deficit_mm",
+        "bare_days",
+        "off_season_days",
+        "soy_stress_days",
+        "year_days",
+        "year_rain_mm",
+        "year_water_use_mm",
+        "year_drainage_mm",
+        "post_soy_days",
+        "post_soy_water_use_mm",
+        "post_soy_drainage_mm"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "covered_days": {
+          "$ref": "#/$defs/stat"
+        },
+        "off_season_water_use_mm": {
+          "$ref": "#/$defs/stat"
+        },
+        "off_season_drainage_mm": {
+          "$ref": "#/$defs/stat"
+        },
+        "storage_at_next_sowing_mm": {
+          "$ref": "#/$defs/stat"
+        },
+        "soy_deficit_mm": {
+          "$ref": "#/$defs/stat"
+        },
+        "maize_deficit_mm": {
+          "$ref": "#/$defs/stat"
+        },
+        "maize_stress_days": {
+          "$ref": "#/$defs/stat"
+        },
+        "next_soy_establishment_deficit_mm": {
+          "$ref": "#/$defs/stat"
+        },
+        "bare_days": {
+          "$ref": "#/$defs/stat"
+        },
+        "off_season_days": {
+          "$ref": "#/$defs/stat"
+        },
+        "soy_stress_days": {
+          "$ref": "#/$defs/stat"
+        },
+        "year_days": {
+          "$ref": "#/$defs/stat"
+        },
+        "year_rain_mm": {
+          "$ref": "#/$defs/stat"
+        },
+        "year_water_use_mm": {
+          "$ref": "#/$defs/stat"
+        },
+        "year_drainage_mm": {
+          "$ref": "#/$defs/stat"
+        },
+        "post_soy_days": {
+          "$ref": "#/$defs/stat"
+        },
+        "post_soy_water_use_mm": {
+          "$ref": "#/$defs/stat"
+        },
+        "post_soy_drainage_mm": {
+          "$ref": "#/$defs/stat"
+        }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "const": "2.0.0"
+    },
+    "product": {
+      "const": "field_shift_strategies"
+    },
+    "package_id": {
+      "type": "string",
+      "pattern": "^field-shift-v2-[0-9a-f]{12}$"
+    },
+    "municipality_code": {
+      "type": "string",
+      "pattern": "^[0-9]{7}$"
+    },
+    "simulated": {
+      "const": true
+    },
+    "reference_scenario": {
+      "const": "reference_fallow"
+    },
+    "reference_note": {
+      "type": "string"
+    },
+    "weather": {
+      "type": "object",
+      "required": [
+        "source",
+        "agricultural_years",
+        "sha256",
+        "days",
+        "first_day",
+        "last_day"
+      ]
+    },
+    "soil": {
+      "type": "object",
+      "required": [
+        "cad_class",
+        "capacity_mm",
+        "initial_storage_fraction",
+        "basis"
+      ]
+    },
+    "scenarios": {
+      "type": "object",
+      "required": [
+        "reference_fallow",
+        "brachiaria",
+        "soy_long_fallow"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "reference_fallow": {
+          "type": "object",
+          "required": [
+            "mean",
+            "valid_years",
+            "label",
+            "crops",
+            "kind",
+            "sequence",
+            "by_year"
+          ],
+          "properties": {
+            "mean": {
+              "$ref": "#/$defs/mean"
+            },
+            "valid_years": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 6
+            },
+            "label": {
+              "enum": [
+                "A",
+                "B",
+                "C"
+              ]
+            },
+            "crops": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "kind": {
+              "type": "string"
+            },
+            "sequence": {
+              "type": "string"
+            },
+            "by_year": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/year"
+              }
+            }
+          }
+        },
+        "brachiaria": {
+          "type": "object",
+          "required": [
+            "mean",
+            "valid_years",
+            "label",
+            "crops",
+            "kind",
+            "sequence",
+            "by_year"
+          ],
+          "properties": {
+            "mean": {
+              "$ref": "#/$defs/mean"
+            },
+            "valid_years": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 6
+            },
+            "label": {
+              "enum": [
+                "A",
+                "B",
+                "C"
+              ]
+            },
+            "crops": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "kind": {
+              "type": "string"
+            },
+            "sequence": {
+              "type": "string"
+            },
+            "by_year": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/year"
+              }
+            }
+          }
+        },
+        "soy_long_fallow": {
+          "allOf": [
+            {
+              "type": "object",
+              "required": [
+                "mean",
+                "valid_years",
+                "label",
+                "crops",
+                "kind",
+                "sequence",
+                "by_year"
+              ],
+              "properties": {
+                "mean": {
+                  "$ref": "#/$defs/mean"
+                },
+                "valid_years": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 6
+                },
+                "label": {
+                  "enum": [
+                    "A",
+                    "B",
+                    "C"
+                  ]
+                },
+                "crops": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "sequence": {
+                  "type": "string"
+                },
+                "by_year": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/year"
+                  }
+                }
+              }
+            },
+            {
+              "properties": {
+                "mean": {
+                  "properties": {
+                    "maize_deficit_mm": {
+                      "type": "null"
+                    },
+                    "maize_stress_days": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "comparisons": {
+      "type": "object",
+      "required": [
+        "brachiaria_minus_reference_fallow",
+        "soy_long_fallow_minus_reference_fallow"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "brachiaria_minus_reference_fallow": {
+          "$ref": "#/$defs/comparison"
+        },
+        "soy_long_fallow_minus_reference_fallow": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/comparison"
+            },
+            {
+              "properties": {
+                "maize_deficit_mm": {
+                  "properties": {
+                    "status": {
+                      "const": "not_applicable"
+                    }
+                  }
+                },
+                "maize_stress_days": {
+                  "properties": {
+                    "status": {
+                      "const": "not_applicable"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "comparisons_note": {
+      "type": "string"
+    },
+    "sensitivity": {
+      "type": "object",
+      "required": [
+        "rain",
+        "parameters",
+        "temperature"
+      ],
+      "properties": {
+        "rain": {
+          "type": "object",
+          "required": [
+            "label",
+            "method",
+            "points"
+          ],
+          "properties": {
+            "label": {
+              "const": "sensitivity test on historical weather, not a climate forecast"
+            },
+            "points": {
+              "type": "array",
+              "minItems": 3,
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "required": [
+                  "multiplier",
+                  "rain_change_percent",
+                  "scenarios",
+                  "comparisons"
+                ],
+                "properties": {
+                  "multiplier": {
+                    "enum": [
+                      0.8,
+                      1.0,
+                      1.2
+                    ]
+                  },
+                  "scenarios": {
+                    "type": "object",
+                    "required": [
+                      "reference_fallow",
+                      "brachiaria",
+                      "soy_long_fallow"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "reference_fallow": {
+                        "type": "object",
+                        "required": [
+                          "mean",
+                          "valid_years"
+                        ],
+                        "properties": {
+                          "mean": {
+                            "$ref": "#/$defs/mean"
+                          },
+                          "valid_years": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 6
+                          }
+                        }
+                      },
+                      "brachiaria": {
+                        "type": "object",
+                        "required": [
+                          "mean",
+                          "valid_years"
+                        ],
+                        "properties": {
+                          "mean": {
+                            "$ref": "#/$defs/mean"
+                          },
+                          "valid_years": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 6
+                          }
+                        }
+                      },
+                      "soy_long_fallow": {
+                        "allOf": [
+                          {
+                            "type": "object",
+                            "required": [
+                              "mean",
+                              "valid_years"
+                            ],
+                            "properties": {
+                              "mean": {
+                                "$ref": "#/$defs/mean"
+                              },
+                              "valid_years": {
+                                "type": "integer",
+                                "minimum": 0,
+                                "maximum": 6
+                              }
+                            }
+                          },
+                          {
+                            "properties": {
+                              "mean": {
+                                "properties": {
+                                  "maize_deficit_mm": {
+                                    "type": "null"
+                                  },
+                                  "maize_stress_days": {
+                                    "type": "null"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "comparisons": {
+                    "type": "object",
+                    "required": [
+                      "brachiaria_minus_reference_fallow",
+                      "soy_long_fallow_minus_reference_fallow"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "brachiaria_minus_reference_fallow": {
+                        "$ref": "#/$defs/comparison"
+                      },
+                      "soy_long_fallow_minus_reference_fallow": {
+                        "allOf": [
+                          {
+                            "$ref": "#/$defs/comparison"
+                          },
+                          {
+                            "properties": {
+                              "maize_deficit_mm": {
+                                "properties": {
+                                  "status": {
+                                    "const": "not_applicable"
+                                  }
+                                }
+                              },
+                              "maize_stress_days": {
+                                "properties": {
+                                  "status": {
+                                    "const": "not_applicable"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "parameter",
+              "value",
+              "scenarios",
+              "comparisons"
+            ],
+            "properties": {
+              "scenarios": {
+                "type": "object",
+                "required": [
+                  "reference_fallow",
+                  "brachiaria",
+                  "soy_long_fallow"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "reference_fallow": {
+                    "type": "object",
+                    "required": [
+                      "mean",
+                      "valid_years"
+                    ],
+                    "properties": {
+                      "mean": {
+                        "$ref": "#/$defs/mean"
+                      },
+                      "valid_years": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 6
+                      }
+                    }
+                  },
+                  "brachiaria": {
+                    "type": "object",
+                    "required": [
+                      "mean",
+                      "valid_years"
+                    ],
+                    "properties": {
+                      "mean": {
+                        "$ref": "#/$defs/mean"
+                      },
+                      "valid_years": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 6
+                      }
+                    }
+                  },
+                  "soy_long_fallow": {
+                    "allOf": [
+                      {
+                        "type": "object",
+                        "required": [
+                          "mean",
+                          "valid_years"
+                        ],
+                        "properties": {
+                          "mean": {
+                            "$ref": "#/$defs/mean"
+                          },
+                          "valid_years": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 6
+                          }
+                        }
+                      },
+                      {
+                        "properties": {
+                          "mean": {
+                            "properties": {
+                              "maize_deficit_mm": {
+                                "type": "null"
+                              },
+                              "maize_stress_days": {
+                                "type": "null"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "comparisons": {
+                "type": "object",
+                "required": [
+                  "brachiaria_minus_reference_fallow",
+                  "soy_long_fallow_minus_reference_fallow"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "brachiaria_minus_reference_fallow": {
+                    "$ref": "#/$defs/comparison"
+                  },
+                  "soy_long_fallow_minus_reference_fallow": {
+                    "allOf": [
+                      {
+                        "$ref": "#/$defs/comparison"
+                      },
+                      {
+                        "properties": {
+                          "maize_deficit_mm": {
+                            "properties": {
+                              "status": {
+                                "const": "not_applicable"
+                              }
+                            }
+                          },
+                          "maize_stress_days": {
+                            "properties": {
+                              "status": {
+                                "const": "not_applicable"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "temperature": {
+          "type": "object",
+          "required": [
+            "status",
+            "reason"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "not_calculated",
+                "calculated"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "not_simulated": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "yield_effect": {
+      "type": "null"
+    },
+    "evidence": {
+      "type": "string"
+    }
+  }
+}

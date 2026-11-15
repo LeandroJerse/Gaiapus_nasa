@@ -1,0 +1,102 @@
+{
+  "soy": {
+    "file": "history_soy.json",
+    "sha256": "72675d2800637dd8476bc14b37ba4ed9a405fefa7f73120dec97f285e1b7cdcd",
+    "trained_harvests": [
+      2002,
+      2024
+    ],
+    "training_rows": 108684,
+    "parity_max_abs_kg_ha": 0.0
+  },
+  "maize2": {
+    "file": "history_maize2.json",
+    "sha256": "20c7f7363edb302525bc8f337e13ae54cc23ebe7a475d8e62a54f8c2ac621110",
+    "trained_harvests": [
+      2003,
+      2024
+    ],
+    "training_rows": 46836,
+    "parity_max_abs_kg_ha": 0.0
+  },
+  "maize1": {
+    "file": "history_maize1.json",
+    "sha256": "32e209aa6de68547b01936d03238a8be492160a5d7b2e4729973e2724873153a",
+    "trained_harvests": [
+      2003,
+      2024
+    ],
+    "training_rows": 119292,
+    "parity_max_abs_kg_ha": 0.0
+  },
+  "wheat": {
+    "file": "history_wheat.json",
+    "sha256": "cb0d61becafd67574800ae019cd375b3193413ea22ce81b56b1edda29ac3093c",
+    "trained_harvests": [
+      2002,
+      2024
+    ],
+    "training_rows": 63582,
+    "parity_max_abs_kg_ha": 0.0
+  },
+  "rice": {
+    "file": "history_rice.json",
+    "sha256": "36af0652515caeace1f072b5ef822797ed1d757d1a3117f626d2149673f479b9",
+    "trained_harvests": [
+      2002,
+      2024
+    ],
+    "training_rows": 91350,
+    "parity_max_abs_kg_ha": 0.0
+  },
+  "bean1": {
+    "file": "history_bean1.json",
+    "sha256": "988fcf0f3f43bc7937911447a4384611b1e6f18663f964e769b4b5f3b6080aad",
+    "trained_harvests": [
+      2003,
+      2024
+    ],
+    "training_rows": 38094,
+    "parity_max_abs_kg_ha": 0.0
+  },
+  "bean2": {
+    "file": "history_bean2.json",
+    "sha256": "e9d502e67d4ce3748090327b32de95ce7684cbe23fe69d0c0ce3c4ebb8c1751d",
+    "trained_harvests": [
+      2003,
+      2024
+    ],
+    "training_rows": 28830,
+    "parity_max_abs_kg_ha": 0.0
+  },
+  "coffee_arabica": {
+    "file": "history_coffee_arabica.json",
+    "sha256": "c5d7e74bafb048f6561454a7d82664923eaa8e24547c321694ebcb650d0cbec7",
+    "trained_harvests": [
+      2014,
+      2024
+    ],
+    "training_rows": 10203,
+    "parity_max_abs_kg_ha": 4.547473508864641e-13
+  },
+  "coffee_conilon": {
+    "file": "history_coffee_conilon.json",
+    "sha256": "9947b09cf640f84820b47f38eafe79d09e4b775cee908a49b13d4f0214373840",
+    "trained_harvests": [
+      2014,
+      2024
+    ],
+    "training_rows": 1980,
+    "parity_max_abs_kg_ha": 4.547473508864641e-13
+  },
+  "coffee_total_mg": {
+    "file": "history_coffee_total_mg.json",
+    "sha256": "af722b804a6dbcbd1cdfcf158017b7e22fb7788e558950574588ecdd0e661c15",
+    "trained_harvests": [
+      2003,
+      2024
+    ],
+    "training_rows": 20835,
+    "parity_max_abs_kg_ha": 2.2737367544323206e-13
+  }
+}

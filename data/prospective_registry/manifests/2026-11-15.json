@@ -1,0 +1,21 @@
+{
+  "as_of": "2026-11-15",
+  "written_at": "2026-11-15T12:38:26.653125+00:00",
+  "records_added": 3,
+  "skipped": {
+    "already_recorded": 1917,
+    "pam_released": 0,
+    "not_ready": 2559
+  },
+  "file": "records/2026-11-15.jsonl",
+  "file_sha256": "3d874f8e0b2e86d48c26b4eb4c271a0f4480199a91c5c7c4e8107e20e2317424",
+  "chain_head": "69f06836eeae8792692eaab4f5217082fb895c8e4b93dc48578541238ac248d7",
+  "protocol_sha256": "6e5e63a4bbc2812360d81946d4c6250464e9c4e095a00dae1a0c2739433edb00",
+  "by_crop": {
+    "maize1": 1,
+    "wheat": 2
+  },
+  "sealed_file": "sealed/2026-11-15.jsonl.gz",
+  "sealed_sha256": "849abc1621eb2348a596ef190209276670f09cc88a28111fb9c6e074afd4b203",
+  "sealed_at": "2026-11-15T12:38:26.679717+00:00"
+}

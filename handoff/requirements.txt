@@ -1,0 +1,10 @@
+# Gaiapus integration (Python 3.11+). CPU only, no GPU needed.
+numpy>=2.0
+pandas>=2.2
+requests>=2.31
+netCDF4>=1.7          # IMERG Late daily rain (OPeNDAP subset)
+torch>=2.3            # only for the soy MG/MT MLP; CPU build is enough
+jsonschema>=4.21      # smoke test / contract validation
+# Optional, for the example API:
+fastapi>=0.110
+uvicorn>=0.29

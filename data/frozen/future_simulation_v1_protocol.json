@@ -1,0 +1,46 @@
+{
+  "protocol_id": "future_simulation_v1",
+  "frozen_at": "2026-11-15",
+  "status": "frozen_before_any_skill_measurement",
+  "purpose": "Calculated crop-season planning for harvest years 2027 and 2028 outside the United States (US entries are added by data under the same contract). This protocol fixes temporal rules, ensemble policy, defined events and status vocabulary BEFORE any skill is measured. It does not evaluate skill; no consumed test is reused to select anything.",
+  "temporal_rules": {
+    "as_of": "Every input must satisfy available_at <= as_of (or, for historical archives with unknown availability, observation date <= as_of with availability declared unknown).",
+    "issued_at": "Real UTC instant the run was produced; never back-dated.",
+    "harvest_year": "Calendar year of the expected harvest; a soy harvest of 2027 is sown in 2026.",
+    "elapsed_days": "Days between sowing and as_of use observations only when an observed series covering them is available; otherwise the season is reported as missing_data (source_unavailable), never filled with climatology silently.",
+    "future_days": "Days after as_of come from historical analog blocks (climatological scenario) until a validated seasonal adapter exists. No forecast product is extended beyond its last valid date.",
+    "leap_years": "Calendar mapping by day offset from an aligned start date (same month-day in the analog year): every source day is used exactly once, precipitation totals are preserved, 29 Feb 2028 is a simulated day; the month-day drift (at most 1 day) is recorded."
+  },
+  "ensemble_policy": {
+    "method": "historical_analog_blocks_v1",
+    "description": "One member per eligible analog start year: the whole target window is copied from consecutive historical days starting at the same month-day of that year, keeping all variables of each day together (multivariate and multi-year coherence). Variables are never resampled independently.",
+    "member_count": "Number of eligible analog years, optionally subsampled by a recorded seed; members are never duplicated to inflate the count.",
+    "coverage_classes": {"standard": ">= 15 complete analog years", "limited": "10-14 complete analog years (shown with limited-coverage notice)", "insufficient_history": "< 10 complete analog years (no run)"},
+    "missing_data": "An analog window with any missing required variable is excluded with a reason; missing is never zero; no interpolation.",
+    "interpretation": "Distribution of plausible trajectories under past climate variability; NOT a daily forecast of 2027/2028; NOT a calibrated probability. 2027 and 2028 may legitimately look alike."
+  },
+  "initial_condition": {
+    "rule": "When observations reach as_of, the engine is warmed up on them from a hypothesis start; otherwise the run starts at as_of with an explicit storage fraction hypothesis.",
+    "default_storage_fraction": 0.5,
+    "sensitivity_fractions": [0.2, 0.9]
+  },
+  "defined_events": [
+    {"event_id": "reproductive_stress_days_ge_10", "definition": "At least 10 crop days in the reproductive phase with water stress coefficient Ks < 1", "unit": "share_of_members"},
+    {"event_id": "crop_deficit_mm_ge_100", "definition": "Season ETc - ETa summed over crop days >= 100 mm", "unit": "share_of_members"},
+    {"event_id": "dry_spell_ge_15_days_in_season", "definition": "At least one run of >= 15 consecutive crop days with precipitation < 1 mm", "unit": "share_of_members"}
+  ],
+  "representative_member": "Member whose (season precipitation, season crop deficit, mean crop-day storage) is nearest, in units of the across-member standard deviation, to the across-member medians; ties -> lowest member id. Quantile bands are reported separately and are not a trajectory.",
+  "yield_policy": {
+    "path_a_reference": "Municipal historical reference = mean of the last up-to-5 IBGE PAM yields of the same crop whose expected publication (PAM year Y published by 31 Oct of Y+1) is <= as_of. Reported with last_label_year and its age; status reference; it does NOT depend on the climate scenario.",
+    "path_b_conditional": "Not offered in v1: the served yield models predict at in-season cutoffs from observed weather and were not validated for pre-planting scenario use; returned as unavailable with reason model_not_validated_for_planning.",
+    "never": ["read labels published after as_of", "fill an unknown lag with zero, mean or a prediction", "multiply a model output by an extra drought penalty", "present scenario quantiles as a calibrated predictive interval"]
+  },
+  "status_vocabulary": {
+    "execution_status": ["queued", "running", "succeeded", "failed", "cancelled"],
+    "capability_status": ["ready", "research", "needs_input", "queued", "missing_data", "out_of_domain", "unsupported"],
+    "scientific_status": ["physical_experimental", "reference", "research", "unavailable"],
+    "research_status": ["research_confirmed", "gain_not_confirmed", "reference_selected", "underpowered", "not_evaluated"],
+    "output_mode": ["simulation_conditional_on_historical_weather", "in_season_forecast"]
+  },
+  "reason_codes": ["insufficient_history", "unsupported_crop_engine", "unknown_yield_lag", "model_out_of_domain", "model_not_validated_for_planning", "source_unavailable", "invalid_calendar", "insufficient_soil_inputs", "flooded_system_not_represented", "perennial_engine_missing", "season_already_started_without_observations"]
+}

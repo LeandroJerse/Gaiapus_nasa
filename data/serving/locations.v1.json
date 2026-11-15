@@ -1,0 +1,53 @@
+{
+  "schema": "gaiapus-locations.v1",
+  "notes": "Field boxes chosen by data/serving/location_cropland.best_box (~850 m square, highest cropland share among windows entirely inside the official boundary; USDA CDL 2021 in the US, ESA WorldCover 2021 elsewhere). Calendars are fixed hypotheses: Brazil uses data/ingest/crops.REGISTRY (same as v7); US uses the midpoint of the 'most active' planting window in USDA NASS Agricultural Handbook 628 (2010 edition). Harvest = sowing + FAO-56 cycle length of the parameter set.",
+  "sources": {
+    "usda_handbook_628_2010": {"title": "Field Crops Usual Planting and Harvesting Dates (Agricultural Handbook 628), USDA NASS, October 2010", "url": "https://esmis.nal.usda.gov/sites/default/release-files/vm40xr56k/dv13zw65p/z603r1055/planting-10-29-2010.txt", "sha256": "1dde6d6c5cc5a22e0076da8c2ff235d870cb597c324e0007f82e4709d158ed34", "retrieved": "2026-11-15"},
+    "census_tigerweb": {"title": "US Census TIGERweb State_County MapServer (counties, states)", "url": "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer", "retrieved": "2026-11-15"},
+    "ibge_malhas_v4": {"title": "IBGE API de malhas geográficas v4 (municípios)", "url": "https://servicodados.ibge.gov.br/api/v4/malhas/municipios", "retrieved": "2026-11-15"},
+    "gaiapus_crops_registry": {"title": "Gaiapus data/ingest/crops.REGISTRY fixed state calendar (hypothesis)", "url": "data/ingest/crops.py"}
+  },
+  "places": [
+    {
+      "id": "BR:ibge:5107925", "name": "Sorriso", "admin1_code": "BR-MT", "admin1_name": "Mato Grosso", "legacy_area_id": "5107925",
+      "field": {"bbox": [-55.92067, -12.55767, -55.913, -12.55], "cropland_share": 1.0, "cropland_source": "esa-worldcover 2021"},
+      "crops": [
+        {"crop": "soy", "parameter_set": "soy", "sowing_month_day": [10, 5], "calendar_source": "gaiapus_crops_registry"},
+        {"crop": "maize2", "parameter_set": "maize2", "sowing_month_day": [1, 5], "calendar_source": "gaiapus_crops_registry"}
+      ]
+    },
+    {
+      "id": "BR:ibge:3170206", "name": "Uberlândia", "admin1_code": "BR-MG", "admin1_name": "Minas Gerais", "legacy_area_id": "3170206",
+      "field": {"bbox": [-48.07617, -19.01317, -48.0685, -19.0055], "cropland_share": 1.0, "cropland_source": "esa-worldcover 2021"},
+      "crops": [{"crop": "soy", "parameter_set": "soy", "sowing_month_day": [11, 5], "calendar_source": "gaiapus_crops_registry"}]
+    },
+    {
+      "id": "BR:ibge:5218805", "name": "Rio Verde", "admin1_code": "BR-GO", "admin1_name": "Goiás", "legacy_area_id": "5218805",
+      "field": {"bbox": [-51.1, -17.81317, -51.09233, -17.8055], "cropland_share": 1.0, "cropland_source": "esa-worldcover 2021"},
+      "crops": [{"crop": "soy", "parameter_set": "soy", "sowing_month_day": [10, 25], "calendar_source": "gaiapus_crops_registry"}]
+    },
+    {
+      "id": "BR:ibge:2903201", "name": "Barreiras", "admin1_code": "BR-BA", "admin1_name": "Bahia", "legacy_area_id": "2903201",
+      "field": {"bbox": [-45.49183, -12.05767, -45.48417, -12.05], "cropland_share": 1.0, "cropland_source": "esa-worldcover 2021"},
+      "crops": [{"crop": "soy", "parameter_set": "soy", "sowing_month_day": [11, 20], "calendar_source": "gaiapus_crops_registry"}]
+    },
+    {
+      "id": "US:fips:19169", "name": "Story County", "admin1_code": "US-IA", "admin1_name": "Iowa", "legacy_area_id": null,
+      "field": {"bbox": [-93.36448, 42.12328, -93.35397, 42.13099], "cropland_share": 0.997, "cropland_source": "usda-cdl 2021"},
+      "crops": [
+        {"crop": "soy", "parameter_set": "soy_us", "sowing_month_day": [5, 20], "calendar_source": "usda_handbook_628_2010", "usual_planting": [[5, 8], [6, 2]], "usual_harvest": [[9, 28], [10, 20]]},
+        {"crop": "maize1", "parameter_set": "maize1_us", "sowing_month_day": [5, 6], "calendar_source": "usda_handbook_628_2010", "usual_planting": [[4, 25], [5, 18]], "usual_harvest": [[10, 5], [11, 9]]}
+      ]
+    },
+    {
+      "id": "US:fips:31185", "name": "York County", "admin1_code": "US-NE", "admin1_name": "Nebraska", "legacy_area_id": null,
+      "field": {"bbox": [-97.71049, 41.03853, -97.70024, 41.04617], "cropland_share": 1.0, "cropland_source": "usda-cdl 2021"},
+      "crops": [{"crop": "maize1", "parameter_set": "maize1_us", "sowing_month_day": [5, 6], "calendar_source": "usda_handbook_628_2010", "usual_planting": [[4, 27], [5, 15]], "usual_harvest": [[10, 4], [11, 10]]}]
+    },
+    {
+      "id": "US:fips:20191", "name": "Sumner County", "admin1_code": "US-KS", "admin1_name": "Kansas", "legacy_area_id": null,
+      "field": {"bbox": [-97.25363, 37.37004, -97.24393, 37.37764], "cropland_share": 0.951, "cropland_source": "usda-cdl 2021"},
+      "crops": [{"crop": "wheat_winter", "parameter_set": "wheat_winter_us", "sowing_month_day": [10, 2], "calendar_source": "usda_handbook_628_2010", "usual_planting": [[9, 15], [10, 20]], "usual_harvest": [[6, 15], [7, 5]]}]
+    }
+  ]
+}

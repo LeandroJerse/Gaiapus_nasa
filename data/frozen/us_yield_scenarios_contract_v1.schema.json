@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gaiapus/us_yield_scenarios_v1",
+  "title": "US county yield scenario run (research)",
+  "description": "One location x crop x harvest year, issued at a real UTC instant. Yield values are county-scale estimates in kg/ha conditioned on climatological weather scenarios and published history; not field-level, not weather forecasts.",
+  "type": "object",
+  "required": ["contract_version", "location_id", "crop_id", "harvest_year", "issued_at", "as_of", "position_vs_season", "history", "weather", "yield", "scientific_status", "limitations", "provenance"],
+  "properties": {
+    "contract_version": {"const": "us_yield_scenarios_v1"},
+    "location_id": {"type": "string", "pattern": "^US:fips:[0-9]{5}$", "description": "county FIPS with leading zeros; a county, not a city"},
+    "county_name": {"type": "string"},
+    "state": {"enum": ["IA", "NE", "KS"]},
+    "crop_id": {"enum": ["soy", "maize", "wheat_winter"], "description": "maize = US corn for grain; never the Brazilian safrinha id"},
+    "harvest_year": {"type": "integer"},
+    "season_label": {"type": "string", "description": "e.g. 2026/2027 for winter wheat sown in fall 2026"},
+    "issued_at": {"type": "string", "format": "date-time"},
+    "as_of": {"type": "string", "format": "date", "description": "last date of information allowed"},
+    "sowing_date": {"type": "string", "format": "date", "description": "fixed regional hypothesis (not observed per farm)"},
+    "feature_cutoff": {"type": "string", "format": "date"},
+    "position_vs_season": {"enum": ["pre_season", "in_season_partial", "post_cutoff", "post_harvest_pre_release"]},
+    "operational_eligibility": {"enum": ["prospective_pre_season", "prospective_in_season", "post_harvest_estimate_not_skill_evidence", "retrospective_only"]},
+    "history": {
+      "type": "object",
+      "required": ["last_label_year", "hist_age", "availability_status"],
+      "properties": {
+        "last_label_year": {"type": ["integer", "null"], "description": "latest crop year with a published, non-suppressed county value as of issued_at"},
+        "hist_age": {"type": ["integer", "null"]},
+        "hist_count": {"type": "integer"},
+        "hist_suppressed_in_window": {"type": "integer"},
+        "availability_status": {"type": ["string", "null"], "description": "confirmed | estimated | ... from data/frozen/us_v2_availability.json"}
+      }
+    },
+    "weather": {
+      "type": "object",
+      "required": ["segments", "members", "analog_years", "seed"],
+      "properties": {
+        "segments": {"type": "array", "items": {"type": "object", "required": ["kind", "start", "end", "origin"],
+          "properties": {"kind": {"enum": ["observed", "climatological_scenario"]}, "start": {"type": "string"}, "end": {"type": "string"}, "origin": {"type": "string"}}}},
+        "members": {"type": "integer", "minimum": 1},
+        "analog_years": {"type": "array", "items": {"type": "integer"}, "description": "distinct source years = effective sample, not independent future years"},
+        "seed": {"type": "integer"},
+        "ensemble_sha256": {"type": ["string", "null"]}
+      }
+    },
+    "yield": {
+      "type": ["object", "null"],
+      "description": "null with reason when unavailable; never zero as a placeholder",
+      "properties": {
+        "unit": {"const": "kg/ha"},
+        "model": {"type": "string"},
+        "model_kind": {"enum": ["in_season", "pre_6m", "pre_18m", "shared"]},
+        "scenario_band": {"type": "object", "properties": {"p10": {"type": "number"}, "p50": {"type": "number"}, "p90": {"type": "number"}},
+                          "description": "spread across weather members only; NOT a calibrated predictive interval"},
+        "predictive_band": {"type": ["object", "null"], "properties": {"p10": {"type": "number"}, "p90": {"type": "number"}},
+                            "description": "P50 + development residual quantiles of the same issue kind; excludes label revision, management change, climate trend"},
+        "reference": {"type": "object", "properties": {"model": {"type": "string"}, "value": {"type": "number"}}, "description": "history-only fallback"},
+        "unavailable_reason": {"type": ["string", "null"], "enum": [null, "unknown_yield_lag", "model_out_of_domain", "insufficient_history", "source_unavailable"]}
+      }
+    },
+    "water_balance": {
+      "type": ["object", "null"],
+      "properties": {
+        "engine": {"type": "string"}, "soil_capacity_class": {"type": "string"}, "initial_fraction": {"type": "number"}, "irrigation": {"type": "string"},
+        "p_reproductive_stress_ge_20d": {"type": ["number", "null"], "description": "share of members with >= 20 reproductive-phase days with Ks < 1"},
+        "cycle_et_deficit_p50_mm": {"type": ["number", "null"]},
+        "unavailable_reason": {"type": ["string", "null"]}
+      }
+    },
+    "scientific_status": {"enum": ["research_confirmed", "gain_not_confirmed", "reference_selected", "underpowered", "not_executed", "not_evaluated"],
+                          "description": "C1 status of the frozen version for this scope and issue kind; product refits inherit it; never 'approved'"},
+    "status_family": {"type": "string"},
+    "domain": {"type": "object", "properties": {"in_v2_universe": {"type": "boolean"}, "spatial_holdout_in_v2": {"type": "boolean"}}},
+    "limitations": {"type": "array", "items": {"type": "string"}},
+    "provenance": {"type": "object", "required": ["manifest", "manifest_sha256"], "properties": {"manifest": {"type": "string"}, "manifest_sha256": {"type": "string"}}},
+    "members": {"type": "array", "description": "optional per-member rows", "items": {"type": "object", "required": ["member_id", "analog_year", "yield_kg_ha"],
+      "properties": {"member_id": {"type": "string"}, "analog_year": {"type": ["integer", "null"]}, "yield_kg_ha": {"type": "number"},
+                     "reproductive_stress_days": {"type": ["integer", "null"]}, "cycle_et_deficit_mm": {"type": ["number", "null"]}}}}
+  }
+}

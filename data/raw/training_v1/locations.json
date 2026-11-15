@@ -1,0 +1,66 @@
+[
+  {
+    "municipality_code": "3170206",
+    "municipality": "Uberlândia",
+    "state_code": "31",
+    "longitude": -48.31751,
+    "latitude": -19.0058,
+    "point_method": "IBGE_polygon_representative_point_NOT_farm_or_crop_weighted"
+  },
+  {
+    "municipality_code": "3170107",
+    "municipality": "Uberaba",
+    "state_code": "31",
+    "longitude": -47.88522,
+    "latitude": -19.61005,
+    "point_method": "IBGE_polygon_representative_point_NOT_farm_or_crop_weighted"
+  },
+  {
+    "municipality_code": "3170404",
+    "municipality": "Unaí",
+    "state_code": "31",
+    "longitude": -46.98759,
+    "latitude": -16.38985,
+    "point_method": "IBGE_polygon_representative_point_NOT_farm_or_crop_weighted"
+  },
+  {
+    "municipality_code": "3147006",
+    "municipality": "Paracatu",
+    "state_code": "31",
+    "longitude": -46.77312,
+    "latitude": -17.1071,
+    "point_method": "IBGE_polygon_representative_point_NOT_farm_or_crop_weighted"
+  },
+  {
+    "municipality_code": "5107925",
+    "municipality": "Sorriso",
+    "state_code": "51",
+    "longitude": -55.77992,
+    "latitude": -12.69585,
+    "point_method": "IBGE_polygon_representative_point_NOT_farm_or_crop_weighted"
+  },
+  {
+    "municipality_code": "5107909",
+    "municipality": "Sinop",
+    "state_code": "51",
+    "longitude": -55.40722,
+    "latitude": -11.74045,
+    "point_method": "IBGE_polygon_representative_point_NOT_farm_or_crop_weighted"
+  },
+  {
+    "municipality_code": "5105259",
+    "municipality": "Lucas do Rio Verde",
+    "state_code": "51",
+    "longitude": -56.18257,
+    "latitude": -13.04885,
+    "point_method": "IBGE_polygon_representative_point_NOT_farm_or_crop_weighted"
+  },
+  {
+    "municipality_code": "5102637",
+    "municipality": "Campo Novo do Parecis",
+    "state_code": "51",
+    "longitude": -57.88598,
+    "latitude": -13.6549,
+    "point_method": "IBGE_polygon_representative_point_NOT_farm_or_crop_weighted"
+  }
+]

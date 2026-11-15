@@ -1,0 +1,1105 @@
+{
+  "version": "prospective_v9",
+  "registered_at": "2026-11-14T19:23:00.936229+00:00",
+  "plan": "docs/superpowers/plans/gaiapus-v9-plano-avaliacao-operacional.md",
+  "target": "municipal yield (kg/ha) of the first IBGE PAM release of the harvest; label_valid rule of cohort_v5",
+  "unit": "crop x municipality x harvest_year x cutoff (or coffee milestone)",
+  "decision_at": "the day the live job first reaches the cutoff with operational inputs (the record issue day)",
+  "eligibility": [
+    "record written on decision_at (issued_at date == decision_at)",
+    "every input retrieved before issued_at (provenance recorded)",
+    "the PAM of the harvest not released on decision_at (IBGE calendar; unknown future dates estimated as 31 Oct of the following year)",
+    "model registered (protocol or amendment) before issued_at"
+  ],
+  "inputs": "operational sources of the live job: NASA POWER meteorology, IMERG Late rain, CERES radiation from POWER where available and ERA5 for the recent days without it, PAM lags published before the decision",
+  "models": [
+    {
+      "model_id": "v7:soy:national",
+      "crop": "soy",
+      "role": "v7_catalog",
+      "scope": "national",
+      "scope_states": null,
+      "artifact": "dist/gaiapus-models-v7/models/soy_site_ridge_2021.json",
+      "sha256": "4d758a6c8ec5c4297e2eb908e1b91e61eae5dadfc8352834423893a154132a68",
+      "family": "ridge"
+    },
+    {
+      "model_id": "v7:soy:MG+MT",
+      "crop": "soy",
+      "role": "v7_catalog",
+      "scope": "MG+MT",
+      "scope_states": [
+        "31",
+        "51"
+      ],
+      "artifact": "dist/gaiapus-models-v7/models/soy_site_mlp_2021.json",
+      "sha256": "4289085ff324fd88e1ef99d52ecd004b62d35f8715c4a78d66dca27202cc5486",
+      "family": "mlp"
+    },
+    {
+      "model_id": "history_ref:soy",
+      "crop": "soy",
+      "role": "simple_reference",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/references/history_soy.json",
+      "sha256": "72675d2800637dd8476bc14b37ba4ed9a405fefa7f73120dec97f285e1b7cdcd",
+      "family": "ridge (trend + published lags)"
+    },
+    {
+      "model_id": "ref_lag_mean:soy",
+      "crop": "soy",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_lag_mean_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "v7:maize2:national",
+      "crop": "maize2",
+      "role": "v7_catalog",
+      "scope": "national",
+      "scope_states": null,
+      "artifact": "dist/gaiapus-models-v7/models/maize2_site_ridge_2021.json",
+      "sha256": "1e173c7b2ea65e8ac8acae93f4e8d3de99a34a73478319da79f3afe20ed67316",
+      "family": "ridge"
+    },
+    {
+      "model_id": "history_ref:maize2",
+      "crop": "maize2",
+      "role": "simple_reference",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/references/history_maize2.json",
+      "sha256": "20c7f7363edb302525bc8f337e13ae54cc23ebe7a475d8e62a54f8c2ac621110",
+      "family": "ridge (trend + published lags)"
+    },
+    {
+      "model_id": "ref_lag_mean:maize2",
+      "crop": "maize2",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_lag_mean_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "v7:maize1:national",
+      "crop": "maize1",
+      "role": "v7_catalog",
+      "scope": "national",
+      "scope_states": null,
+      "artifact": "dist/gaiapus-models-v7/models/maize1_ref_lag_mean_reference_2021.json",
+      "sha256": "32a247ef4fde63020734740044a2cff277624cbcd9151daa693f8b22ead535df",
+      "family": "reference"
+    },
+    {
+      "model_id": "history_ref:maize1",
+      "crop": "maize1",
+      "role": "simple_reference",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/references/history_maize1.json",
+      "sha256": "32e209aa6de68547b01936d03238a8be492160a5d7b2e4729973e2724873153a",
+      "family": "ridge (trend + published lags)"
+    },
+    {
+      "model_id": "ref_lag_mean:maize1",
+      "crop": "maize1",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_lag_mean_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "v7:wheat:national",
+      "crop": "wheat",
+      "role": "v7_catalog",
+      "scope": "national",
+      "scope_states": null,
+      "artifact": "dist/gaiapus-models-v7/models/wheat_site_hgb_2021.json",
+      "sha256": "301271882ed5bf312b9d5d7e70891aad88f1968e22e3e31ebb0486d96ef52e0e",
+      "family": "hgb"
+    },
+    {
+      "model_id": "history_ref:wheat",
+      "crop": "wheat",
+      "role": "simple_reference",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/references/history_wheat.json",
+      "sha256": "cb0d61becafd67574800ae019cd375b3193413ea22ce81b56b1edda29ac3093c",
+      "family": "ridge (trend + published lags)"
+    },
+    {
+      "model_id": "ref_lag_mean:wheat",
+      "crop": "wheat",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_lag_mean_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "v7:rice:national",
+      "crop": "rice",
+      "role": "v7_catalog",
+      "scope": "national",
+      "scope_states": null,
+      "artifact": "dist/gaiapus-models-v7/models/rice_site_hgb_2021.json",
+      "sha256": "80bff82929fc3763ba237cc3b96de6d4961c0f54e88ec0a65da842354867885e",
+      "family": "hgb"
+    },
+    {
+      "model_id": "history_ref:rice",
+      "crop": "rice",
+      "role": "simple_reference",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/references/history_rice.json",
+      "sha256": "36af0652515caeace1f072b5ef822797ed1d757d1a3117f626d2149673f479b9",
+      "family": "ridge (trend + published lags)"
+    },
+    {
+      "model_id": "ref_lag_mean:rice",
+      "crop": "rice",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_lag_mean_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "v7:bean1:national",
+      "crop": "bean1",
+      "role": "v7_catalog",
+      "scope": "national",
+      "scope_states": null,
+      "artifact": "dist/gaiapus-models-v7/models/bean1_ref_lag_mean_reference_2021.json",
+      "sha256": "e9bc59fa4d1d8211347a8fc1d4a807656a1277dadaff6ad52cc62290dfcf06ba",
+      "family": "reference"
+    },
+    {
+      "model_id": "history_ref:bean1",
+      "crop": "bean1",
+      "role": "simple_reference",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/references/history_bean1.json",
+      "sha256": "988fcf0f3f43bc7937911447a4384611b1e6f18663f964e769b4b5f3b6080aad",
+      "family": "ridge (trend + published lags)"
+    },
+    {
+      "model_id": "ref_lag_mean:bean1",
+      "crop": "bean1",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_lag_mean_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "v7:bean2:national",
+      "crop": "bean2",
+      "role": "v7_catalog",
+      "scope": "national",
+      "scope_states": null,
+      "artifact": "dist/gaiapus-models-v7/models/bean2_site_hgb_2021.json",
+      "sha256": "421f8d88d7de1ba4c3669e0d749b4f095d9dd45696755acdbc770d51419f82f5",
+      "family": "hgb"
+    },
+    {
+      "model_id": "history_ref:bean2",
+      "crop": "bean2",
+      "role": "simple_reference",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/references/history_bean2.json",
+      "sha256": "e9d502e67d4ce3748090327b32de95ce7684cbe23fe69d0c0ce3c4ebb8c1751d",
+      "family": "ridge (trend + published lags)"
+    },
+    {
+      "model_id": "ref_lag_mean:bean2",
+      "crop": "bean2",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_lag_mean_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "v7:coffee_arabica:national",
+      "crop": "coffee_arabica",
+      "role": "v7_catalog",
+      "scope": "national",
+      "scope_states": null,
+      "artifact": "dist/gaiapus-models-v7/models/coffee_arabica_site_hgb_2021.json",
+      "sha256": "498c73f9d3d1d92bbc37a70f5d73b2ba2e11521d016382ef9ad0953373d9d04f",
+      "family": "hgb"
+    },
+    {
+      "model_id": "history_ref:coffee_arabica",
+      "crop": "coffee_arabica",
+      "role": "simple_reference",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/references/history_coffee_arabica.json",
+      "sha256": "c5d7e74bafb048f6561454a7d82664923eaa8e24547c321694ebcb650d0cbec7",
+      "family": "ridge (trend + published lags)"
+    },
+    {
+      "model_id": "ref_last_available:coffee_arabica",
+      "crop": "coffee_arabica",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_last_available_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "ref_same_phase:coffee_arabica",
+      "crop": "coffee_arabica",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_same_phase_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "ref_biennial_mean:coffee_arabica",
+      "crop": "coffee_arabica",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_biennial_mean_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "ref_cycle_mean:coffee_arabica",
+      "crop": "coffee_arabica",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_cycle_mean_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "v7:coffee_conilon:national",
+      "crop": "coffee_conilon",
+      "role": "v7_catalog",
+      "scope": "national",
+      "scope_states": null,
+      "artifact": "dist/gaiapus-models-v7/models/coffee_conilon_ref_last_available_reference_2021.json",
+      "sha256": "ba81f821573045258bcc13b49a792cfc9c581dfe4c8e0061b11052402690442a",
+      "family": "reference"
+    },
+    {
+      "model_id": "history_ref:coffee_conilon",
+      "crop": "coffee_conilon",
+      "role": "simple_reference",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/references/history_coffee_conilon.json",
+      "sha256": "9947b09cf640f84820b47f38eafe79d09e4b775cee908a49b13d4f0214373840",
+      "family": "ridge (trend + published lags)"
+    },
+    {
+      "model_id": "ref_last_available:coffee_conilon",
+      "crop": "coffee_conilon",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_last_available_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "ref_same_phase:coffee_conilon",
+      "crop": "coffee_conilon",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_same_phase_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "ref_biennial_mean:coffee_conilon",
+      "crop": "coffee_conilon",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_biennial_mean_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "ref_cycle_mean:coffee_conilon",
+      "crop": "coffee_conilon",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_cycle_mean_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "v7:coffee_total_mg:national",
+      "crop": "coffee_total_mg",
+      "role": "v7_catalog",
+      "scope": "national",
+      "scope_states": null,
+      "artifact": "dist/gaiapus-models-v7/models/coffee_total_mg_hydro_hgb_2021.json",
+      "sha256": "891380a951d6b4542f5d37896acc9a35f84276d32a420693801ba525d06ce0f6",
+      "family": "hgb"
+    },
+    {
+      "model_id": "history_ref:coffee_total_mg",
+      "crop": "coffee_total_mg",
+      "role": "simple_reference",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/references/history_coffee_total_mg.json",
+      "sha256": "af722b804a6dbcbd1cdfcf158017b7e22fb7788e558950574588ecdd0e661c15",
+      "family": "ridge (trend + published lags)"
+    },
+    {
+      "model_id": "ref_last_available:coffee_total_mg",
+      "crop": "coffee_total_mg",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_last_available_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "ref_same_phase:coffee_total_mg",
+      "crop": "coffee_total_mg",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_same_phase_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "ref_biennial_mean:coffee_total_mg",
+      "crop": "coffee_total_mg",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_biennial_mean_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "ref_cycle_mean:coffee_total_mg",
+      "crop": "coffee_total_mg",
+      "role": "simple_reference",
+      "scope_states": null,
+      "column": "ref_cycle_mean_kg_ha",
+      "family": "published reference"
+    },
+    {
+      "model_id": "v8:soy_mgmt",
+      "crop": "soy",
+      "role": "candidate",
+      "scope_states": [
+        "31",
+        "51"
+      ],
+      "artifact": "dist/gaiapus-models-v8/models/soy_mgmt.json",
+      "sha256": "33cc3a0d5c087f0d85bbce9552db4c7c1b873f24ba8c570e1316ede116caef79",
+      "family": "history + hgb"
+    },
+    {
+      "model_id": "v8:maize2_mgmt",
+      "crop": "maize2",
+      "role": "candidate",
+      "scope_states": [
+        "31",
+        "51"
+      ],
+      "artifact": "dist/gaiapus-models-v8/models/maize2_mgmt.json",
+      "sha256": "e49c6be4849614d34823a001e8c129479aa33e891f5e725883856cbc9010ee47",
+      "family": "reference + mlp"
+    },
+    {
+      "model_id": "v8:maize2_national",
+      "crop": "maize2",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/gaiapus-models-v8/models/maize2_national.json",
+      "sha256": "85cef47b285ba1143d5f249fdf77f1917633d6be106b1f5fe02946d65919fed5",
+      "family": "reference + mlp"
+    },
+    {
+      "model_id": "v8:coffee_arabica",
+      "crop": "coffee_arabica",
+      "role": "candidate",
+      "scope_states": [
+        "31"
+      ],
+      "artifact": "dist/gaiapus-models-v8/models/coffee_arabica.json",
+      "sha256": "b984feb811c7be689fc06239b3d941660342ac79072b4fa68c4f7e4b8d5d0508",
+      "family": "reference + hgb"
+    },
+    {
+      "model_id": "v8:coffee_total_mg",
+      "crop": "coffee_total_mg",
+      "role": "candidate",
+      "scope_states": [
+        "31"
+      ],
+      "artifact": "dist/gaiapus-models-v8/models/coffee_total_mg.json",
+      "sha256": "2a11158c4fa7d5b708142e2a6d3ed05d9a377c66fc586bc19c48c1e093b9f85c",
+      "family": "reference + hgb"
+    },
+    {
+      "model_id": "v8:coffee_conilon",
+      "crop": "coffee_conilon",
+      "role": "candidate",
+      "scope_states": [
+        "32"
+      ],
+      "artifact": "dist/gaiapus-models-v8/models/coffee_conilon.json",
+      "sha256": "6c39ca12455ae57b2d1defef37536d8c55f2c27b458a9fec1fd91bb1e74399a1",
+      "family": "mean + mlp"
+    },
+    {
+      "model_id": "v9:soy:national:ridge",
+      "crop": "soy",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/soy_national_ridge.json",
+      "sha256": "5fd6222abaab43d537142fd2760417918dcad0adc0331fb0ee15ac511fdcf462",
+      "weights_sha256": null,
+      "family": "ref_lag_mean + F2_weather_hydro + ridge",
+      "registered_at": "2026-11-14T20:01:56.834709+00:00"
+    },
+    {
+      "model_id": "v9:soy:national:hgb",
+      "crop": "soy",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/soy_national_hgb.json",
+      "sha256": "5daf9b6edbb58c357b847ee95b593188af6eb3d79b7845620cf8fd31f7d1f586",
+      "weights_sha256": null,
+      "family": "ref_lag_mean + F3_no_latlon + hgb",
+      "registered_at": "2026-11-14T20:01:56.844141+00:00"
+    },
+    {
+      "model_id": "v9:soy:national:mlp",
+      "crop": "soy",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/soy_national_mlp.json",
+      "sha256": "fa8f22dc5fe8a970dc68376209f1df48e2a07f746f4e8582adcb4a6ab4f4fcf5",
+      "weights_sha256": "4584db074330ec1be6f4d4928fe1d27210864b5b81c597e5fdcf6f334275eb2a",
+      "family": "history + F2_weather_hydro + mlp",
+      "registered_at": "2026-11-14T20:01:56.853377+00:00"
+    },
+    {
+      "model_id": "v9:soy:MG+MT:ridge",
+      "crop": "soy",
+      "role": "candidate",
+      "scope_states": [
+        "31",
+        "51"
+      ],
+      "artifact": "dist/prospective_v9/candidates/soy_MGMT_ridge.json",
+      "sha256": "43dc4d2326a278336c24fabdd5b0453a93c468da831bb2571ad45cd0f158aefb",
+      "weights_sha256": null,
+      "family": "ref_lag_mean + F3_no_latlon + ridge",
+      "registered_at": "2026-11-14T20:01:56.864593+00:00"
+    },
+    {
+      "model_id": "v9:soy:MG+MT:hgb",
+      "crop": "soy",
+      "role": "candidate",
+      "scope_states": [
+        "31",
+        "51"
+      ],
+      "artifact": "dist/prospective_v9/candidates/soy_MGMT_hgb.json",
+      "sha256": "59e2a9372f7e894cf0401e2d8317590d0c9599adf76bc8adcb3bc2881f18f680",
+      "weights_sha256": null,
+      "family": "history + F3_full + hgb",
+      "registered_at": "2026-11-14T20:01:56.878398+00:00"
+    },
+    {
+      "model_id": "v9:soy:MG+MT:mlp",
+      "crop": "soy",
+      "role": "candidate",
+      "scope_states": [
+        "31",
+        "51"
+      ],
+      "artifact": "dist/prospective_v9/candidates/soy_MGMT_mlp.json",
+      "sha256": "298e629c56a72b95b25d59681fa14a79fd66e7cdf54159dc24cc289744bdfd2b",
+      "weights_sha256": "ccd6e13ca5578723a35dfdb49193843278bf3cdb260c019bbccaaa639937f09e",
+      "family": "history + F3_full + mlp",
+      "registered_at": "2026-11-14T20:01:56.890517+00:00"
+    },
+    {
+      "model_id": "v9:maize2:national:ridge",
+      "crop": "maize2",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/maize2_national_ridge.json",
+      "sha256": "a366020d80ff1dc4b42d8f911488e4de737c43c7fea93d9f02578bf7190d3c26",
+      "weights_sha256": null,
+      "family": "history + F2_weather_hydro + ridge",
+      "registered_at": "2026-11-14T20:01:56.902662+00:00"
+    },
+    {
+      "model_id": "v9:maize2:national:hgb",
+      "crop": "maize2",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/maize2_national_hgb.json",
+      "sha256": "c8302efd03ec8fe318d4fa1b953d9017ba38a23786ba1bdb2f3ee9cc38d664ec",
+      "weights_sha256": null,
+      "family": "ref_lag_mean + F2_weather_hydro + hgb",
+      "registered_at": "2026-11-14T20:01:56.914742+00:00"
+    },
+    {
+      "model_id": "v9:maize2:national:mlp",
+      "crop": "maize2",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/maize2_national_mlp.json",
+      "sha256": "b7a375ac8a0901be0a1dbac3c09749e583cd934497f54b38b5576ec9ee15b75f",
+      "weights_sha256": "32d42ae3796bd967e04de8720243d017514949770c5eadd8636e0836ec99ae98",
+      "family": "ref_lag_mean + F2_weather_hydro + mlp",
+      "registered_at": "2026-11-14T20:01:56.932794+00:00"
+    },
+    {
+      "model_id": "v9:maize2:MG+MT:ridge",
+      "crop": "maize2",
+      "role": "candidate",
+      "scope_states": [
+        "31",
+        "51"
+      ],
+      "artifact": "dist/prospective_v9/candidates/maize2_MGMT_ridge.json",
+      "sha256": "052e911f82d73dbd8cb1b6c5d2ed931be41c4a8234002277a3154b1e2f47ad91",
+      "weights_sha256": null,
+      "family": "ref_lag_mean + F3_no_latlon + ridge",
+      "registered_at": "2026-11-14T20:01:56.947897+00:00"
+    },
+    {
+      "model_id": "v9:maize2:MG+MT:hgb",
+      "crop": "maize2",
+      "role": "candidate",
+      "scope_states": [
+        "31",
+        "51"
+      ],
+      "artifact": "dist/prospective_v9/candidates/maize2_MGMT_hgb.json",
+      "sha256": "07d3383ca61257c0bf423fb9b3769f6a6a13df4e56932fa2a0d2361b57f4f5e9",
+      "weights_sha256": null,
+      "family": "history + F3_no_latlon + hgb",
+      "registered_at": "2026-11-14T20:01:56.959940+00:00"
+    },
+    {
+      "model_id": "v9:maize2:MG+MT:mlp",
+      "crop": "maize2",
+      "role": "candidate",
+      "scope_states": [
+        "31",
+        "51"
+      ],
+      "artifact": "dist/prospective_v9/candidates/maize2_MGMT_mlp.json",
+      "sha256": "76df302e88f5723d893651679dbe2cc6f78885613d3a7405b046eecbc06020da",
+      "weights_sha256": "f5baacc28ef4955c0dff70cbb18c4c5ddb3c5bb318e0b87e39d57f87e9ff44e0",
+      "family": "ref_lag_mean + F3_no_latlon + mlp",
+      "registered_at": "2026-11-14T20:01:56.972675+00:00"
+    },
+    {
+      "model_id": "v9:maize1:national:ridge",
+      "crop": "maize1",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/maize1_national_ridge.json",
+      "sha256": "bb1f012e4343822db8f17aad90e75f1d9af4b13dd2fd3792ac64952ad877804a",
+      "weights_sha256": null,
+      "family": "ref_lag_mean + F3_full + ridge",
+      "registered_at": "2026-11-14T20:01:56.982000+00:00"
+    },
+    {
+      "model_id": "v9:maize1:national:hgb",
+      "crop": "maize1",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/maize1_national_hgb.json",
+      "sha256": "da2b1e69227951c4ff3eddc604cbff1fe4ad7e77d732ce89269214222375f30e",
+      "weights_sha256": null,
+      "family": "history + F3_no_latlon + hgb",
+      "registered_at": "2026-11-14T20:01:56.991786+00:00"
+    },
+    {
+      "model_id": "v9:maize1:national:mlp",
+      "crop": "maize1",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/maize1_national_mlp.json",
+      "sha256": "0b285c40e0a67f2526aaf8f0341851826781d2fb3afa43c1d57870ff9de61097",
+      "weights_sha256": "c79fbcabd990ab8064a36b466014b8ae0b5ab22fdc6f5f8edd99826d145295a7",
+      "family": "ref_lag_mean + F3_full + mlp",
+      "registered_at": "2026-11-14T20:01:57.000135+00:00"
+    },
+    {
+      "model_id": "v9:wheat:national:ridge",
+      "crop": "wheat",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/wheat_national_ridge.json",
+      "sha256": "fa69aba011342e01533e4e9bdb5cae0365025a79c0c62b1a935a0aeaf821011d",
+      "weights_sha256": null,
+      "family": "history + F3_full + ridge",
+      "registered_at": "2026-11-14T20:01:57.010044+00:00"
+    },
+    {
+      "model_id": "v9:wheat:national:hgb",
+      "crop": "wheat",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/wheat_national_hgb.json",
+      "sha256": "4e04162d38c8207ff81c85ff7a5fa5bf13936507466ca04f272a33a1aa5dea9d",
+      "weights_sha256": null,
+      "family": "history + F3_full + hgb",
+      "registered_at": "2026-11-14T20:01:57.020443+00:00"
+    },
+    {
+      "model_id": "v9:wheat:national:mlp",
+      "crop": "wheat",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/wheat_national_mlp.json",
+      "sha256": "8683e5e9aac07dd9dab1cfa5b4552a6539991fa2652c60f6bf0d51c65124c811",
+      "weights_sha256": "01af5dfb186c5a125c7410a425c16d4e296c2851c343c5bfdf1e275658eb3f26",
+      "family": "history + F3_full + mlp",
+      "registered_at": "2026-11-14T20:01:57.030305+00:00"
+    },
+    {
+      "model_id": "v9:rice:national:ridge",
+      "crop": "rice",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/rice_national_ridge.json",
+      "sha256": "436662a4b965e31205ae43740d4e753556c723db03ae3abc259aa9e45998cac0",
+      "weights_sha256": null,
+      "family": "ref_lag_mean + F3_full + ridge",
+      "registered_at": "2026-11-14T20:01:57.038630+00:00"
+    },
+    {
+      "model_id": "v9:rice:national:hgb",
+      "crop": "rice",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/rice_national_hgb.json",
+      "sha256": "da4cfa0e07d9b7cde2d23b264a49f4850407b5153d2695b85728f24bdb6df455",
+      "weights_sha256": null,
+      "family": "history + F3_full + hgb",
+      "registered_at": "2026-11-14T20:01:57.045745+00:00"
+    },
+    {
+      "model_id": "v9:rice:national:mlp",
+      "crop": "rice",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/rice_national_mlp.json",
+      "sha256": "76438795a6c16d190f2bea8e1c0bdb06aaa6639a26116a835250c228da1f64b6",
+      "weights_sha256": "84b889968d9a7899e933b390cd3fab7e5cfc6465cd057106796098a5d35cab07",
+      "family": "ref_lag_mean + F3_full + mlp",
+      "registered_at": "2026-11-14T20:01:57.053746+00:00"
+    },
+    {
+      "model_id": "v9:bean1:national:ridge",
+      "crop": "bean1",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/bean1_national_ridge.json",
+      "sha256": "1244ca552aa59ae4e3ba8abf28f32f050917405dea0b921d88fc9b9ce4ab067d",
+      "weights_sha256": null,
+      "family": "ref_lag_mean + F2_weather_hydro + ridge",
+      "registered_at": "2026-11-14T20:01:57.060975+00:00"
+    },
+    {
+      "model_id": "v9:bean1:national:hgb",
+      "crop": "bean1",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/bean1_national_hgb.json",
+      "sha256": "69a046039a8d8a0d9110dd0e474aa304581c099149bb01e1c3284c1dd52ba2e7",
+      "weights_sha256": null,
+      "family": "ref_lag_mean + F1_weather + hgb",
+      "registered_at": "2026-11-14T20:01:57.068918+00:00"
+    },
+    {
+      "model_id": "v9:bean1:national:mlp",
+      "crop": "bean1",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/bean1_national_mlp.json",
+      "sha256": "8f240fa47b9405c43e642c8c2759b755bcb61adce5d293f6e706f6cf9b52721d",
+      "weights_sha256": "d3b25ccde672cc29ef458ea4efb510961af1489522b924eaa71192505cc53709",
+      "family": "history + F1_weather + mlp",
+      "registered_at": "2026-11-14T20:01:57.076201+00:00"
+    },
+    {
+      "model_id": "v9:bean2:national:ridge",
+      "crop": "bean2",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/bean2_national_ridge.json",
+      "sha256": "ddb10f11ff526361deccf473efcda5d7111c88078846b1501f59b331424e348e",
+      "weights_sha256": null,
+      "family": "ref_lag_mean + F1_weather + ridge",
+      "registered_at": "2026-11-14T20:01:57.084009+00:00"
+    },
+    {
+      "model_id": "v9:bean2:national:hgb",
+      "crop": "bean2",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/bean2_national_hgb.json",
+      "sha256": "a3ae532abfddc9383bd7b674faf760a28a190d4a7371563a29c9d12669d90da7",
+      "weights_sha256": null,
+      "family": "history + F3_full + hgb",
+      "registered_at": "2026-11-14T20:01:57.091736+00:00"
+    },
+    {
+      "model_id": "v9:bean2:national:mlp",
+      "crop": "bean2",
+      "role": "candidate",
+      "scope_states": null,
+      "artifact": "dist/prospective_v9/candidates/bean2_national_mlp.json",
+      "sha256": "dd993c1ed3bfa385bca703d97abe2447aae44cba4e991b0d6aacdcd2b8552f9c",
+      "weights_sha256": "f38b0d013a7f830c8a8b33b3e8d6a42c1154a6397be047e141f33bfa26879133",
+      "family": "history + F3_full + mlp",
+      "registered_at": "2026-11-14T20:01:57.100404+00:00"
+    },
+    {
+      "model_id": "v9:coffee_arabica:MG:ridge",
+      "crop": "coffee_arabica",
+      "role": "candidate",
+      "scope_states": [
+        "31"
+      ],
+      "artifact": "dist/prospective_v9/candidates/coffee_arabica_MG_ridge.json",
+      "sha256": "f19c69bc304b8809018c3ed316c933959611cb4e6a6ace5626977d03dd2304fe",
+      "weights_sha256": null,
+      "family": "ref_last_available + F3_full + ridge",
+      "registered_at": "2026-11-14T20:01:57.108048+00:00"
+    },
+    {
+      "model_id": "v9:coffee_arabica:MG:hgb",
+      "crop": "coffee_arabica",
+      "role": "candidate",
+      "scope_states": [
+        "31"
+      ],
+      "artifact": "dist/prospective_v9/candidates/coffee_arabica_MG_hgb.json",
+      "sha256": "f2b900f288247c6620c949102dfc1a2276e140b1f6a830bdb30385812ed1577e",
+      "weights_sha256": null,
+      "family": "ref_cycle_mean + F3_full + hgb",
+      "registered_at": "2026-11-14T20:01:57.116768+00:00"
+    },
+    {
+      "model_id": "v9:coffee_arabica:MG:mlp",
+      "crop": "coffee_arabica",
+      "role": "candidate",
+      "scope_states": [
+        "31"
+      ],
+      "artifact": "dist/prospective_v9/candidates/coffee_arabica_MG_mlp.json",
+      "sha256": "415db0473c1de27c321766ba1ce2b1dfcfc41592d95daddb59d2401a786b3bb3",
+      "weights_sha256": "ee999183f895880a32588a9491ad4fb7d5b1bfba32351191254e2819831db887",
+      "family": "ref_cycle_mean + F3_full + mlp",
+      "registered_at": "2026-11-14T20:01:57.124936+00:00"
+    },
+    {
+      "model_id": "v9:coffee_total_mg:MG:ridge",
+      "crop": "coffee_total_mg",
+      "role": "candidate",
+      "scope_states": [
+        "31"
+      ],
+      "artifact": "dist/prospective_v9/candidates/coffee_total_mg_MG_ridge.json",
+      "sha256": "ee56c69662a323818fd329e591ad36259c03273e24de225715237893b837aecb",
+      "weights_sha256": null,
+      "family": "ref_last_available + F1_weather + ridge",
+      "registered_at": "2026-11-14T20:01:57.133657+00:00"
+    },
+    {
+      "model_id": "v9:coffee_total_mg:MG:hgb",
+      "crop": "coffee_total_mg",
+      "role": "candidate",
+      "scope_states": [
+        "31"
+      ],
+      "artifact": "dist/prospective_v9/candidates/coffee_total_mg_MG_hgb.json",
+      "sha256": "7f3e8e34b5018c398d65789c9b9beea4f5f5c026cd93a0d3fa1c8bd1be8212e8",
+      "weights_sha256": null,
+      "family": "history + F3_full + hgb",
+      "registered_at": "2026-11-14T20:01:57.144510+00:00"
+    },
+    {
+      "model_id": "v9:coffee_total_mg:MG:mlp",
+      "crop": "coffee_total_mg",
+      "role": "candidate",
+      "scope_states": [
+        "31"
+      ],
+      "artifact": "dist/prospective_v9/candidates/coffee_total_mg_MG_mlp.json",
+      "sha256": "e3deb1b92cf4d1b8374efbbe2d75e0e9cdc1c947ea8cadaca680d3c68b3b57cb",
+      "weights_sha256": "cc5daac328b823563a8164e8024d34a7139b2b369f29b60b735ae075eedc11c7",
+      "family": "ref_last_available + F3_full + mlp",
+      "registered_at": "2026-11-14T20:01:57.155870+00:00"
+    },
+    {
+      "model_id": "v9:coffee_conilon:ES:ridge",
+      "crop": "coffee_conilon",
+      "role": "candidate",
+      "scope_states": [
+        "32"
+      ],
+      "artifact": "dist/prospective_v9/candidates/coffee_conilon_ES_ridge.json",
+      "sha256": "df08cf4f4d7fd7d5f5cfc2c4e18da20c9b20a5011345e1c654d035b4eb66bdb9",
+      "weights_sha256": null,
+      "family": "ref_cycle_mean + F2_weather_hydro + ridge",
+      "registered_at": "2026-11-14T20:01:57.166301+00:00"
+    },
+    {
+      "model_id": "v9:coffee_conilon:ES:hgb",
+      "crop": "coffee_conilon",
+      "role": "candidate",
+      "scope_states": [
+        "32"
+      ],
+      "artifact": "dist/prospective_v9/candidates/coffee_conilon_ES_hgb.json",
+      "sha256": "3a40be28c08aa5fe743b09022d9fa2f3cae4f50bfddc308bf2e87e052df00283",
+      "weights_sha256": null,
+      "family": "mean + F3_full + hgb",
+      "registered_at": "2026-11-14T20:01:57.180968+00:00"
+    },
+    {
+      "model_id": "v9:coffee_conilon:ES:mlp",
+      "crop": "coffee_conilon",
+      "role": "candidate",
+      "scope_states": [
+        "32"
+      ],
+      "artifact": "dist/prospective_v9/candidates/coffee_conilon_ES_mlp.json",
+      "sha256": "7626e8c8199d9b3e3977e53edff03b72b7c33094b439cc4740504f3879386a0b",
+      "weights_sha256": "421422baa61222d4e9f83a04fb163defa82b18e16e92c6bfccc80b469d118d58",
+      "family": "mean + F3_full + mlp",
+      "registered_at": "2026-11-14T20:01:57.195876+00:00"
+    }
+  ],
+  "no_rewrite": "a key is recorded once; models added later never get predictions for keys already recorded",
+  "scoring": {
+    "when": "once, after the first PAM release of the harvest",
+    "pairing": "keys with predictions from every compared model; cutoffs averaged per harvest before averaging harvests",
+    "weighting": "MG+MT scopes 50% per state; other scopes harvest-weighted",
+    "uncertainty": "bootstrap of municipalities stratified by state, 2,000 draws; one season shares weather shocks, so the CI is conditional on the season"
+  },
+  "approval_for_operational_use": {
+    "requires_all": [
+      "relative MAE gain >= 5% against EVERY registered simple reference of the crop (history_ref and the published references), CI95 upper bound of the MAE difference < 0 for each, Holm-adjusted across the candidates of the same crop x scope",
+      "no priority state (MG, MT for soy/maize; MG for coffee; ES for conilon) more than 5% worse than the best simple reference",
+      "at least 30 paired municipality-harvests and >= 80% of the eligible keys with a prediction",
+      "operational inputs only, every input with available_at <= decision_at in the provenance"
+    ],
+    "scope": "the crop x scope scored, municipal yield product only; not field yield",
+    "decision": "approval allows a human decision to change the served model; nothing is promoted automatically",
+    "renewal": "scores continue every season; a later failure withdraws the approval"
+  },
+  "earliest_scoring": "harvest 2027 keys after the PAM 2027 release (expected ~September 2028)",
+  "amendments": [
+    {
+      "added_at": "2026-11-14T19:47:05.415060+00:00",
+      "note": "Reporting rule fixed before any scoring: a key whose first record was issued more than 7 days after the day the live job could first reach its cutoff (cutoff day + 6-day operational lag) is a late registration; late registrations (e.g. all keys of the first registry day whose cutoffs were reached earlier) are scored and reported separately from on-time registrations, and approval uses on-time registrations only."
+    },
+    {
+      "added_at": "2026-11-14T20:01:56.834709+00:00",
+      "model_id": "v9:soy:national:ridge",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:56.844141+00:00",
+      "model_id": "v9:soy:national:hgb",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:56.853377+00:00",
+      "model_id": "v9:soy:national:mlp",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:56.864593+00:00",
+      "model_id": "v9:soy:MG+MT:ridge",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:56.878398+00:00",
+      "model_id": "v9:soy:MG+MT:hgb",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:56.890517+00:00",
+      "model_id": "v9:soy:MG+MT:mlp",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:56.902662+00:00",
+      "model_id": "v9:maize2:national:ridge",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:56.914742+00:00",
+      "model_id": "v9:maize2:national:hgb",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:56.932794+00:00",
+      "model_id": "v9:maize2:national:mlp",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:56.947897+00:00",
+      "model_id": "v9:maize2:MG+MT:ridge",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:56.959940+00:00",
+      "model_id": "v9:maize2:MG+MT:hgb",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:56.972675+00:00",
+      "model_id": "v9:maize2:MG+MT:mlp",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:56.982000+00:00",
+      "model_id": "v9:maize1:national:ridge",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:56.991786+00:00",
+      "model_id": "v9:maize1:national:hgb",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.000135+00:00",
+      "model_id": "v9:maize1:national:mlp",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.010044+00:00",
+      "model_id": "v9:wheat:national:ridge",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.020443+00:00",
+      "model_id": "v9:wheat:national:hgb",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.030305+00:00",
+      "model_id": "v9:wheat:national:mlp",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.038630+00:00",
+      "model_id": "v9:rice:national:ridge",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.045745+00:00",
+      "model_id": "v9:rice:national:hgb",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.053746+00:00",
+      "model_id": "v9:rice:national:mlp",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.060975+00:00",
+      "model_id": "v9:bean1:national:ridge",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.068918+00:00",
+      "model_id": "v9:bean1:national:hgb",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.076201+00:00",
+      "model_id": "v9:bean1:national:mlp",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.084009+00:00",
+      "model_id": "v9:bean2:national:ridge",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.091736+00:00",
+      "model_id": "v9:bean2:national:hgb",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.100404+00:00",
+      "model_id": "v9:bean2:national:mlp",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.108048+00:00",
+      "model_id": "v9:coffee_arabica:MG:ridge",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.116768+00:00",
+      "model_id": "v9:coffee_arabica:MG:hgb",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.124936+00:00",
+      "model_id": "v9:coffee_arabica:MG:mlp",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.133657+00:00",
+      "model_id": "v9:coffee_total_mg:MG:ridge",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.144510+00:00",
+      "model_id": "v9:coffee_total_mg:MG:hgb",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.155870+00:00",
+      "model_id": "v9:coffee_total_mg:MG:mlp",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.166301+00:00",
+      "model_id": "v9:coffee_conilon:ES:ridge",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.180968+00:00",
+      "model_id": "v9:coffee_conilon:ES:hgb",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:01:57.195876+00:00",
+      "model_id": "v9:coffee_conilon:ES:mlp",
+      "reason": "v9 candidate (data/frozen/training_v9_protocol.json), frozen at registration"
+    },
+    {
+      "added_at": "2026-11-14T20:09:27.063792+00:00",
+      "amendment_id": "A2-coverage-denominator",
+      "note": "Coverage = usable keys / expected keys. Expected keys of a model: every covered municipality (catalog coverage, the model scope states and, for candidates, the artifact coverage) x cutoff of the harvest whose planned issue date (cutoff date + 6-day lag) is on or after the Brasilia day of the model registration. Usable = on-time record, provenance accepted, non-null estimate.",
+      "eligibility_impact": "missing records (job not run, inputs incomplete, not ready), late records, provenance rejections and model errors now count against coverage; before, the denominator was only records already containing the model"
+    },
+    {
+      "added_at": "2026-11-14T20:09:27.075551+00:00",
+      "amendment_id": "A3-priority-states",
+      "note": "A priority state of the scope (MG and MT for soy/maize2 MG+MT, MG for MG coffee, ES for conilon) with no paired harvest makes the scope result inconclusive; approval is blocked for that scope.",
+      "eligibility_impact": "before, a priority state without pairs passed the state check silently"
+    },
+    {
+      "added_at": "2026-11-14T20:09:27.089175+00:00",
+      "amendment_id": "A4-provenance",
+      "note": "A record enters an approval decision only if: (i) the hash chain of all sealed batches is intact; (ii) its protocol_sha256 is in data/frozen/prospective_v9_protocol_versions.jsonl with a version time not after issued_at; (iii) provenance of NASA POWER, IMERG Late and IBGE PAM is present; (iv) every used input has a retrieval time not after issued_at; (v) availability is proven: the retrieval time was recorded at retrieval (retrieved_at_basis = recorded), or the sealed batch holding the record was committed no later than the day after decision_at. Version hashes are of the protocol file bytes as written (CRLF on the registry machine).",
+      "eligibility_impact": "first batch (2026-11-14): POWER and IMERG retrieval times come from cache file times (no sidecar yet); the batch was committed the same day (abb7381, 2026-11-14 16:47 -03), so (v) holds through sealing; records with a missing source or a retrieval after issue are rejected"
+    },
+    {
+      "added_at": "2026-11-14T20:09:27.108446+00:00",
+      "amendment_id": "A5-dates",
+      "note": "All dates are Brasilia calendar days (UTC-03:00, no daylight saving): cutoff_date = sowing or coffee production-year start + cutoff_days - 1; planned_issue = cutoff_date + 6 (operational data lag); deadline = planned_issue + 7 (tolerance of A1); issued_date = Brasilia day of issued_at, which must equal decision_at. On time: issued_date <= deadline. The registry refuses an as_of different from the Brasilia day of the run.",
+      "eligibility_impact": "first batch re-counted with this rule: 244 on time (soy 84 and maize1 160, cutoff 2026-11-03, deadline 2026-11-16) and 1,673 late; an earlier statement that all were late was wrong; no record was rewritten and the tolerance was not changed"
+    },
+    {
+      "added_at": "2026-11-14T20:09:27.134444+00:00",
+      "amendment_id": "A6-calendar",
+      "note": "The first scoring is expected after the official release of PAM 2027 (IBGE calendar; historically September of the following year, so around September 2028); the date is conditional on that release.",
+      "eligibility_impact": "none"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+[
+ {"location_id": "BR:ibge:5107925", "name": "Sorriso", "state_code": "51", "plans": ["soy", "soy>maize2"], "crops": ["soy", "maize2", "rice", "bean1", "bean2"]},
+ {"location_id": "BR:ibge:3170206", "name": "Uberlândia", "state_code": "31", "plans": ["soy", "soy>maize2"], "crops": ["soy", "maize2", "maize1", "wheat", "bean1", "bean2", "coffee_arabica", "coffee_total_mg"]},
+ {"location_id": "BR:ibge:5218805", "name": "Rio Verde", "state_code": "52", "plans": ["soy", "soy>maize2"], "crops": ["soy", "maize2", "maize1", "wheat", "rice", "bean1", "bean2"]},
+ {"location_id": "BR:ibge:2903201", "name": "Barreiras", "state_code": "29", "plans": ["soy"], "crops": ["soy", "maize1", "wheat"]}
+]

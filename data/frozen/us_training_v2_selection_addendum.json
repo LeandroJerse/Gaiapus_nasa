@@ -1,0 +1,30 @@
+{
+  "version": "us_training_v2_selection_addendum_1",
+  "registered_before": "reading any development score file (data/processed/us_training_v2/dev/*); dev runs were in progress, unread",
+  "amends": "data/frozen/us_training_v2_protocol.json (operational detail only; no hypothesis, family or threshold changed)",
+  "development_mechanics": {
+    "mlp_early_stopping": "inner split: latest target year of the fold's fit rows is the early-stopping set; the model is then refit on all fit rows for the median best epoch; the scored validation year is never used for stopping (v1 used the validation year)",
+    "fit_rows": "earlier target years whose label available_at <= issued_at of the validation row's issue kind; holdout counties never fitted",
+    "baseline_fallback": "missing history -> fold fit-row median yield"
+  },
+  "selection": {
+    "policy": "per scope: score(policy) = min over non-baseline candidates c of mean over issue kinds of validation MAE(policy, c, kind); choose the lower score; exact tie -> B",
+    "F1_in_season_selected": "argmin of in_season validation MAE over {last, mean3, trend, history_ridge} and the non-baseline candidates of the chosen policy; a baseline may win (status reference_selected)",
+    "pre_season_weather_model": "for pre_6m / pre_18m: argmin over non-baseline candidates of the chosen policy of observed-weather validation MAE at that kind; used inside the ensemble chain",
+    "pre_season_history_only": "argmin over {last, mean3, trend, history_ridge} of validation MAE at that kind",
+    "experiment_arms": "each arm (E1a availability_replay, E1a fixed_lag2, E1b v1 population, E3, E4, E2a, E2b) selects by in_season validation MAE over baselines and non-baseline candidates of its own pipeline (policy A, in_season rows only)",
+    "base_for_E3_E4": "the main pipeline's policy-A in_season selection (identical rows and candidates without the added/replaced features)"
+  },
+  "chain": {
+    "members": "all eligible analog years whose full target window is complete before issued_at (weather_ensemble.build_ensemble, seed 42); minimum 10",
+    "point_prediction": "median of member predictions (P50)",
+    "development_chain_years": "2015-2024, pre_6m and pre_18m, models refit per fold exactly as in development",
+    "band_scenario": "P10-P90 across members (scenario spread only)",
+    "band_predictive": "member P50 + empirical quantiles (10%, 90%) of development chain residuals of the same scope and issue kind, pooled over development years; labelled separately"
+  },
+  "confirmation_scoring": {
+    "seen_keys": "C1 rows of non-holdout counties with a published 2025 value; holdout reported separately",
+    "spatial_gate": "non-negative MAE gain on holdout counties over development validation years (pairs >= 30), computed from the development predictions frozen before opening",
+    "bootstrap": "paired county-cluster bootstrap, 2000 reps, seed 42; Bonferroni 53 two-sided -> upper quantile 1 - 0.05/(2*53)"
+  }
+}

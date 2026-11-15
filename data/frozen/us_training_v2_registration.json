@@ -1,0 +1,20 @@
+{
+ "registered_at": "2026-11-15T13:48:20.269646+00:00",
+ "statement": "Registered before any US v2 model fit, validation score or confirmation label read.",
+ "files": {
+  "data/frozen/us_training_v2_protocol.json": "37eb33121614593055e52328875cc1089b8909b2514549f0fd2f6c591b54cc3e",
+  "data/frozen/us_v2_availability.json": "e06d5476f85967722a4e9abd6792e4d0c85d9a8df96afde8f35f235e3307ca95",
+  "data/processed/us_training_v2/counties_v2.json": "ce58080aad48ac74af7849552cdba8246a103790498b622c1e23daafac4aa067",
+  "data/processed/us_training_v2/weather_features_power.csv.gz": "d80bdbf8934d535aa4cb5d3f39c2d2a207ed9f6f97c8ff4d0f895d91e1173cbd",
+  "data/raw/us_training_v2/usda_manifest.json": "b4fef60d1280f2da46505e4d85f364aa470878267e179b8f0ef27a2ed2c65b54",
+  "data/raw/us_training_v2/development.jsonl.gz": "f762fecabe464cd2cae9f98b906c44a3005a50ce153a4ff572a7ecc13b8f650f",
+  "data/raw/us_training_v2/sealed_confirmation_2025.jsonl.gz": "94f2ca798db3f1b04455f1fb8854d28f9be8027a4dd6c6b29653619951437922",
+  "data/raw/us_training_v2/progress.jsonl.gz": "77afedb7be6c615d408881e177e395562086294d1eb025a4459891ee879c3ab2",
+  "data/processed/us_training_v2/weather_coverage_summary.json": "ae08575d3d518c67d27dab84d2d1008957fd40a534ddfcfd05fef12607b5588d",
+  "data/frozen/us_training_v1_seal.json": "58efa296a479c639e1fd5583379b74d9ade77543b8c4f14435ed1c71bf86d03a",
+  "data/ingest/us_v2_data.py": "820d11c468885c227a6817a760070919a7b71c17d38b609ee338bb300fb817c8",
+  "data/ingest/us_v2_weather.py": "82e9ac7503fe5c3c0aa96b905dedbdd8a3b6abf08791e2a40daaccd4b6bda611",
+  "data/ingest/us_v2_features.py": "c02b8ace4801ebb86ce2a59baf360c0f671a2ccb1017610ccd8c9d171ad6418b",
+  "data/ingest/us_v2_select.py": "9df4ac98189e4542c32d268edbd2fdd921b6cf444a93263c105d048987ed7c3a"
+ }
+}

@@ -1,0 +1,65 @@
+{
+  "version": "training_v8_protocol",
+  "registered_at": "2026-11-14T17:10:00Z",
+  "registered_before_any_v8_score": true,
+  "plan": "docs/superpowers/plans/2026-11-14-gaiapus-v8-melhoria-preditiva.md",
+  "priority": ["soy MG+MT", "maize2 (MG+MT priority, national context)", "coffee arabica MG, coffee total MG, coffee conilon ES"],
+  "development_data": {
+    "allowlist": "data/processed/training_v8/audit.json -> development_manifest (sha256 per file)",
+    "harvest_years": [2002, 2021],
+    "loader": "data/ingest/cohort_v8.load_development: explicit files only, rejects any harvest year > 2021, duplicated keys, cutoffs after the decision and unpublished lags",
+    "forbidden": "2022-2024 test tables, predictions and sealed labels (opened once for v7; context only, never used for features, selection or bias correction)"
+  },
+  "partitions": {
+    "external_validation": "walk-forward targets 2019, 2020, 2021; each fitted on harvests <= Y-2 (PAM publication gap)",
+    "internal_selection": "inside each external fold: validate on the last 2 training years, fit on training years <= first validation year - 2 (one-year publication gap); every choice (baseline, feature set, learner, hyperparameters, shrinkage) is made here",
+    "spatial": "existing hashed holdout; scores reported separately for municipalities used in training and held-out municipalities",
+    "grouping": "all cutoffs of a harvest stay together; independent units = municipality x crop x harvest"
+  },
+  "scopes": {
+    "soy_mgmt": {"crop": "soy", "states": ["31", "51"], "training_pools": ["national", "scope"], "metric_weighting": "harvest-level MAE, mean per state, 50% MG / 50% MT"},
+    "maize2_mgmt": {"crop": "maize2", "states": ["31", "51"], "training_pools": ["national", "scope"], "metric_weighting": "harvest-level MAE, 50% MG / 50% MT"},
+    "maize2_national": {"crop": "maize2", "states": "all", "training_pools": ["national"], "metric_weighting": "harvest-level MAE, all harvests equal"},
+    "coffee_arabica": {"crop": "coffee_arabica", "states": ["31"], "training_pools": ["scope"]},
+    "coffee_total_mg": {"crop": "coffee_total_mg", "states": ["31"], "training_pools": ["scope"]},
+    "coffee_conilon": {"crop": "coffee_conilon", "states": ["32"], "training_pools": ["scope"]}
+  },
+  "baselines_reported": {
+    "annual": ["published mean of lags Y-2..Y-4 (ref_lag_mean)", "fitted history (Ridge on trend and lags)", "v7 national Ridge site config", "v7 regional MLP site config (soy MG+MT only)"],
+    "coffee": ["ref_last_available", "ref_same_phase", "ref_biennial_mean", "ref_cycle_mean", "fitted history", "v7 champion config"]
+  },
+  "candidates": {
+    "base_for_correction": {"annual": ["ref_lag_mean", "history"], "coffee": ["ref_cycle_mean", "ref_last_available", "history"]},
+    "feature_sets_annual": {"F1_weather": "weather", "F2_weather_hydro": "weather + water balance by phase", "F3_full": "weather + water balance + latitude, longitude, elevation", "F3_no_latlon": "weather + water balance + elevation only"},
+    "feature_sets_coffee": {"F1_weather": "weather + previous production year", "F2_weather_hydro": "+ coffee water balance", "F3_full": "+ latitude, longitude, elevation"},
+    "learners": {
+      "ridge_alpha": [1, 10, 100, 1000],
+      "hgb": [{"max_iter": 200, "max_leaf_nodes": 7, "min_samples_leaf": 40, "l2_regularization": 10.0, "learning_rate": 0.05},
+              {"max_iter": 400, "max_leaf_nodes": 15, "min_samples_leaf": 40, "l2_regularization": 1.0, "learning_rate": 0.05}],
+      "mlp": {"hidden": [[32, 16], [64, 32], [128, 64]], "dropout": [0.0, 0.1], "weight_decay": [0.0001, 0.01], "learning_rate": [0.001, 0.003],
+              "loss": "smooth_l1 on the standardized residual (as v7)", "batch": 4096, "precision": "fp32", "max_epochs": 120, "patience": 10,
+              "selection_seed": 11, "final_seeds": [101, 102, 103, 104, 105], "device": "cuda required"}
+    },
+    "shrinkage": [0.0, 0.25, 0.5, 0.75, 1.0],
+    "shrinkage_note": "prediction = base + shrinkage x learned correction; 0 is the base itself",
+    "registered_experiments": ["soy: removal of latitude/longitude (F3_no_latlon)", "soy and maize2: national vs scope-only training pool", "soy: learning curve by number of training harvest years and municipalities", "maize2: irrigation infrastructure attribute (Censo Agro 2017 pivot share), only for targets decided after its publication (2019-10-25), i.e. folds 2020 and 2021", "coffee: direct model vs correction of ref_cycle_mean", "loss: MSE vs smooth_l1 for the selected soy MLP (one experiment, reported, not used for selection)"]
+  },
+  "metrics": ["MAE", "RMSE", "bias", "MAE / mean yield", "p90 absolute error", "harvests", "municipalities", "coverage"],
+  "aggregation": "cutoffs averaged within each harvest before averaging harvests; by state, year, cutoff and spatial scope",
+  "uncertainty": "paired differences, bootstrap of municipalities (2000 draws, seed 42), stratified by state for MG+MT; year sensitivity reported; few years limit the interval",
+  "promotion_criteria": {
+    "relative_mae_reduction_min": 0.05,
+    "reference": "the strongest simple reference on the external validation (lowest MAE among published mean and fitted history; coffee: also the four coffee references) - a deliberately hard bar",
+    "ci95_upper_below_zero": true,
+    "no_priority_state_worse_than": 0.05,
+    "otherwise": "experimental; the winning reference is documented",
+    "note": "5% is an engineering threshold chosen in this plan, not a scientific standard"
+  },
+  "independent_evaluation": {
+    "candidate": "harvest 2025 (PAM 2025 released 2026-09-17)",
+    "eligibility_audit": "no 2025 label was used in v3-v7 development or selection; the live job and one debugging print read PAM 2025 values as lag inputs for harvest 2027 (coffee, municipality 3170206) - recorded as minor exposure",
+    "procedure": "after committing the frozen v8 choices: fetch PAM 2025 into a separate sealed folder; build 2025 features with the retrospective sources used in training; refit the frozen configuration on harvests <= 2023 (2022-2023 labels used for fitting only); score once against the same baselines",
+    "technical_failure_rule": "a technical failure may be fixed and rerun with justification, never by changing choices after seeing results"
+  },
+  "limitations_declared_upfront": ["2019-2021 were inspected in earlier rounds (v3-v7); the external validation is not pristine", "2022-2024 cannot be an independent test anymore", "state sowing calendars are hypotheses", "municipal yield does not validate field yield or causal management effects"]
+}

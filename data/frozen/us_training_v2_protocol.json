@@ -1,0 +1,88 @@
+{
+  "version": "us_training_v2",
+  "registered_date_local": "2026-11-15",
+  "registered_before": "any US v2 model fit, validation score or confirmation label read",
+  "purpose": "Separate, pre-registered US county-yield experiments (IA/NE/KS) plus future-season scenario models; research only, no automatic promotion",
+  "preserves": {"v1_protocol_sha256": "60f40fc6fd0f9feade9adfb392618923c79531bfe68bb640af812118ab7f096d", "v1_score_sha256": "97689340eb5ea9769d65b98598ba2248f3d071eb124280375c61f171b45ddc81", "v1_seal": "data/frozen/us_training_v1_seal.json", "brazil_untouched": true},
+  "v1_interpretation": "The hist_age mismatch (fit ages ~2, validation/test ages 2-5) is a hypothesis to be tested by ablation, not a demonstrated cause of the v1 outcome.",
+  "scopes": {"IA_soy": ["IA", "soy"], "IA_maize": ["IA", "maize"], "NE_soy": ["NE", "soy"], "NE_maize": ["NE", "maize"], "KS_wheat_winter": ["KS", "wheat_winter"]},
+  "data": {
+    "labels": "USDA NASS Quick Stats bulk qs.crops_20261114 (same compressed sha256 as v1); SURVEY county YIELD BU/ACRE, ALL PRODUCTION PRACTICES, converted to kg/ha exactly as v1",
+    "development_crop_years": [1990, 2024],
+    "seen_in_v1_test": [2022, 2023, 2024],
+    "never_read_before_v2": [2021],
+    "sealed": {"C1": "crop year 2025 -> data/raw/us_training_v2/sealed_confirmation_2025.jsonl.gz, readable only by data/ingest/us_v2_confirm.py", "future": "crop years >= 2026 -> sealed_future.jsonl.gz (0 rows in snapshot)"},
+    "weather": "NASA POWER daily point (county internal point), 2000-01-01..2026-11-13; five variables PRECTOTCORR, T2M_MIN, T2M_MAX, RH2M, WS2M",
+    "radiation_excluded": "ALLSKY_SFC_SW_DWN measured latency 75 days on 2026-11-14 retrieval; unavailable to an issue at the cutoff day",
+    "availability_table": "data/frozen/us_v2_availability.json",
+    "availability_rule": "a label/source value enters a row issued at issued_at only if available_at <= issued_at; unknown = unavailable; estimated dates are conservative bounds and make the evaluation 'retrospective_estimated_availability'"
+  },
+  "counties": {
+    "file": "data/processed/us_training_v2/counties_v2.json",
+    "eligibility": "development labels only: >=12 valid yields 2001-2024 per crop (both crops in IA/NE) and >=3 valid in the last 5 published crop years <=2024 (KS: 2019-2023 because 2024 winter wheat county estimates were not published)",
+    "spatial_holdout": "round(0.2 x eligible) per state by sha256('us_training_v2:spatial:FIPS'), anchors excluded; excluded from every fit, preprocessing and selection",
+    "v1_population": "v1 counties that are also v2-eligible",
+    "no_confirmation_information": true
+  },
+  "issue_kinds": {
+    "in_season": "issued_at = cutoff + 1 day; observed weather for the whole pre-cutoff window",
+    "pre_6m": "issued_at = window start - 6 months; no observed season weather",
+    "pre_18m": "issued_at = window start - 18 months; no observed season weather",
+    "calendar": "fixed regional windows as v1: soy 05-20 +90 d, maize 05-06 +90 d, winter wheat 10-02 of previous year +180 d",
+    "history": "history_at_issue: crop years published by issued_at and < target year; window of 10 crop years anchored on the latest published year; suppressed excluded but counted; last label resolved per county and crop",
+    "grouping": "all issue kinds, horizons and ensemble members of the same fips x crop x harvest year share one group for validation splits and bootstrap"
+  },
+  "development_selection": {
+    "validation_years": [2015, 2024],
+    "fold_rule": "for validation year V and issue kind k: fit rows = target years < V whose label available_at <= issued_at(V, k); features of each fit row computed at its own issue; imputation/scaling/feature handling fitted inside the fold",
+    "metric": "county-balanced MAE (kg/ha) averaged over validation years, non-holdout counties",
+    "candidates": {"baselines": ["last", "mean3", "trend", "history_ridge"], "history_ridge_alpha": 10.0, "ridge_alphas": [10.0, 100.0], "hgb_leaves": [7, 15], "hgb_iterations": 200, "hgb_learning_rate": 0.05, "hgb_min_samples_leaf": 20, "mlp_hidden": [[32, 16], [64, 32]], "mlp_dropout": 0.1, "mlp_weight_decay": 0.01, "mlp_learning_rate": 0.001, "mlp_max_epochs": 250, "mlp_patience": 25, "mlp_selection_seed": 42, "mlp_final_seeds": [101, 102, 103], "mlp_batch_size": 256, "mlp_target": "standardized residual of history_ridge", "hgb_target": "residual of history_ridge", "clip_min_zero": true},
+    "horizon_policy": "A = one weather+history model per issue kind; B = one shared model with hist_age, hist_count, hist_suppressed_in_window, lead_days and missing indicators. Chosen per scope by mean validation MAE over the three issue kinds (observed-weather rows), tie -> B",
+    "pre_season_history_only": "for pre_6m/pre_18m a history-only comparator is selected among baselines and history_ridge by validation MAE at that issue kind",
+    "spatial_development_check": "the same validation protocol scored on holdout counties (never fitted) for every confirmation comparison"
+  },
+  "experiments": {
+    "E1a_availability": {"question": "replaying availability vs a consistent fixed 2-year lag, same population and keys", "arms": ["availability_replay", "fixed_lag2"], "population": "v1_population minus holdout", "mode": "in_season"},
+    "E1b_expansion": {"question": "training on all eligible counties vs v1 population only, both availability_replay, evaluated on the same keys", "arms": ["U2_minus_holdout", "v1_population_minus_holdout"], "keys": "v1_population minus holdout", "mode": "in_season"},
+    "E1_mismatch_diagnostic": {"question": "v1-style rule (fit at target-2, evaluate with a fixed ceiling at the end of the fit years) vs fixed_lag2, v1 population", "status": "development diagnostic only, not in the confirmation family"},
+    "E2a_source": {"question": "gridMET point vs POWER point, same features/population", "status": "conditional on gridMET retrieval within budget"},
+    "E2b_weighting": {"question": "gridMET weighted by previous-year CDL crop pixels (proxy) vs gridMET point", "mask_rule": "CDL year <= target-1 with available_at <= issued_at; else fallback point with flag", "status": "conditional on CDL retrieval"},
+    "E3_ne_irrigation": {"question": "NE: lagged irrigated share of harvested area (NASS survey practice split, last crop year 2018) and dry-exposure interactions vs base", "denominator": "harvested area, GRAIN for maize; planted area not mixed", "missing": "NaN + indicator, never rainfed"},
+    "E4_ks_calendar": {"question": "KS: window start at the state-level Crop Progress 50% planted date of the previous fall (reports published by issued_at) vs fixed 10-02, same cutoff day", "segments": "establishment (start..11-30), winter (12-01..end Feb), spring (03-01..cutoff)", "extra_descriptor": "growing degree days base 0 C (McMaster & Wilhelm 1997, Agric. For. Meteorol. 87:291-300)", "level": "state, not county observation", "pre_season": "progress does not exist yet: fixed calendar"},
+    "PRE_chain": {"question": "pre_6m and pre_18m: P50 of the weather-model applied to every ensemble member (data/forecasting/weather_ensemble.py, analog years complete before issued_at) vs the history-only comparator at the same issue"}
+  },
+  "confirmation": {
+    "C1": {"crop_year": 2025, "kind": "reserved retrospective", "exposure": {"IA": "two Iowa 2025 county values were seen in search snippets before v1; IA results carry exposure_qualified and are reported separately"}, "evaluation_class": "retrospective_estimated_availability", "open_once": true},
+    "family": {
+      "F1": "in_season selected model vs last, mean3, trend, history_ridge (5 scopes x 4 = 20)",
+      "F2": "E1a availability_replay vs fixed_lag2 (5)",
+      "F3": "E1b expanded vs v1 population (5)",
+      "F4": "E2a gridMET point vs POWER point (5)",
+      "F5": "E2b CDL-weighted vs gridMET point (5)",
+      "F6": "E3 vs base (NE_soy, NE_maize = 2)",
+      "F7": "E4 vs base (KS = 1)",
+      "F8": "pre_6m chain vs pre_6m history-only (5)",
+      "F9": "pre_18m chain vs pre_18m history-only (5)",
+      "size": 53,
+      "justification": "every confirmatory comparison registered here; horizon policy A/B, mismatch diagnostic and interval coverage are development or descriptive and not counted. Experiments not executed keep their slots (status not_executed), which only makes the correction more conservative."
+    },
+    "rule": "confirmed only if: MAE gain >= 5% on C1 seen keys; paired county-cluster bootstrap (2000 reps, seed 42) Bonferroni upper bound for 53 comparisons < 0; non-negative MAE gain on holdout counties in development validation (>=30 pairs); >=30 C1 seen pairs. C1 spatial-holdout pairs are expected below 30 for every scope (10-17) and are reported descriptively.",
+    "sensitivity_predefined": ["all states excluding IA (exposure)", "per state reporting"],
+    "after_opening": "no refit, reselection or threshold change is presented as independent evaluation; post-confirmation refits including 2025 are product models that inherit the C1 status of the frozen version"
+  },
+  "prospective_registry": {
+    "fields": ["issued_at (real UTC)", "intended_cutoff", "issue_kind", "information_used (sources, last label per county, observed weather through)", "position_vs_harvest", "position_vs_label_release", "operational_eligibility"],
+    "2026": "issued after harvest and before label release -> post-harvest pre-release estimate; not evidence of pre-harvest skill",
+    "2027": "KS winter wheat in season (sown fall 2026); IA/NE pre-season; eligible as genuinely prospective at the registered issue kind",
+    "2028": "pre-season (about 18 months ahead) prospective",
+    "no_backdating": true
+  },
+  "scenarios": {
+    "weather": "data/forecasting/weather_ensemble.py (consecutive-day blocks of analog years, multivariate, leap-safe), analog years complete before issued_at; climatological scenario, not a forecast",
+    "per_member": "features and yield per member; FAO-56 water balance per member with US parameter sets where available",
+    "uncertainty_included": "weather-scenario spread; development residual quantiles of the same issue kind added in a separately labelled predictive band",
+    "uncertainty_excluded": "label revision, management change, technology trend break, structural model error beyond development residuals, climate trend",
+    "seasonal_forecasts": "not used in v2 (no hindcast evaluation available)"
+  },
+  "promotion": "No US model is promoted automatically; maximum status research_confirmed; Brazilian models, registry and serving catalog untouched"
+}

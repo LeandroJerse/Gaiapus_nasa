@@ -1,0 +1,8 @@
+# Location core generator (data/serving/location_*.py). Install: uv venv .venv && uv pip install -r data/serving/requirements-location-core.txt
+numpy
+requests
+rasterio
+shapely
+pyproj
+jsonschema
+pillow

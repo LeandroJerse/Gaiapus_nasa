@@ -1,0 +1,13 @@
+{
+  "parameter_set_id": "gaiapus-fao56-br-v1",
+  "status": "hypothesis_not_calibrated",
+  "basis": "Crop values copied unchanged from the frozen research bucket data/models/water_balance.py (CROPS soy/maize2, Brazil sets, revision 8bb7358) so that the new engine reproduces it under equivalent configuration. Fallow values are an explicit hypothesis (order of magnitude of FAO-56 bare-soil Kc ini), not calibrated.",
+  "p_adjustment": "p = clamp(p_base + 0.04 * (5 - ETc), 0.1, 0.8) (FAO-56 Table 22 note)",
+  "crops": {
+    "soy": {"phase_days": [15, 35, 45, 20], "kc_initial": 0.4, "kc_mid": 1.15, "kc_end": 0.5, "p_base": 0.5},
+    "maize2": {"phase_days": [20, 40, 40, 20], "kc_initial": 0.3, "kc_mid": 1.2, "kc_end": 0.35, "p_base": 0.55}
+  },
+  "fallow": {"kc": 0.3, "p": 0.5, "basis": "hypothesis: bare/residue soil evaporation, single coefficient, no stage-two drying model"},
+  "aliases": {"maize_safrinha": "maize2"},
+  "rejected_ids": {"coffee": "ambiguous: choose coffee_arabica or coffee_conilon and a perennial system", "coffee_total_mg": "statistical aggregate, not a plantable species"}
+}

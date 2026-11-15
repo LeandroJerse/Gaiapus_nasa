@@ -1,0 +1,8 @@
+*.sh text eol=lf
+# US research: files hashed by frozen manifests must keep LF bytes on checkout
+data/ingest/gpu.py text eol=lf
+data/ingest/us_*.py text eol=lf
+data/frozen/us_*.json text eol=lf
+tests/test_us_*.py text eol=lf
+scripts/us_*.py text eol=lf
+scripts/report_us_training.py text eol=lf

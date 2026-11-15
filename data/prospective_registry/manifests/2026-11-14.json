@@ -1,0 +1,27 @@
+{
+  "as_of": "2026-11-14",
+  "written_at": "2026-11-14T19:46:10.675975+00:00",
+  "records_added": 1917,
+  "skipped": {
+    "already_recorded": 0,
+    "pam_released": 0,
+    "not_ready": 2562
+  },
+  "file": "records/2026-11-14.jsonl",
+  "file_sha256": "644f3d91bbacf64c1714f226668b48333d880dda533776e12756ad46742e0cd3",
+  "chain_head": "725ccd8ee87a2845f112916b30984ac798362d8ea4be11e06414498ff9c5cd71",
+  "protocol_sha256": "a49e8517c84f3eaee3e4ea88484446c4d2c11ef57720033b05d286fed090c325",
+  "by_crop": {
+    "bean1": 183,
+    "coffee_arabica": 311,
+    "coffee_conilon": 60,
+    "coffee_total_mg": 317,
+    "maize1": 484,
+    "rice": 51,
+    "soy": 84,
+    "wheat": 427
+  },
+  "sealed_file": "sealed/2026-11-14.jsonl.gz",
+  "sealed_sha256": "127237512cfff29e5fd51a8c68b55f0825f56816924ac67773c7214522e320ed",
+  "sealed_at": "2026-11-14T19:47:05.413602+00:00"
+}

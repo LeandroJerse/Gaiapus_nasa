@@ -1,0 +1,214 @@
+{
+  "evaluated_once": true,
+  "rule": "frozen champions and guide 30 regional rule, no reselection",
+  "years": [
+    2022,
+    2023,
+    2024
+  ],
+  "protocol": "target Y fitted on harvests <= Y-2 with frozen hyperparameters",
+  "crops": {
+    "soy": {
+      "national": {
+        "mae_kg_ha": 582.1,
+        "bias_kg_ha": 328.6,
+        "out_of_training_mae_kg_ha": 536.2,
+        "history_mae_kg_ha": 714.4,
+        "difference_vs_history_kg_ha": -132.2,
+        "ci95": [
+          -152.0,
+          -113.9
+        ],
+        "harvests": 2370,
+        "municipalities": 790,
+        "confirmed": true,
+        "outcome": "confirmed"
+      },
+      "regional": [
+        {
+          "scope": "MG+MT",
+          "model": "site+mlp",
+          "mae_kg_ha": 252.7,
+          "mae_by_state": {
+            "31": 266.6,
+            "51": 238.7
+          },
+          "history_mae_kg_ha": 247.7,
+          "difference_vs_history_kg_ha": 4.9,
+          "ci95": [
+            -1.2,
+            10.9
+          ],
+          "confirmed": false,
+          "outcome": "not_confirmed"
+        }
+      ]
+    },
+    "maize2": {
+      "national": {
+        "mae_kg_ha": 973.5,
+        "bias_kg_ha": 10.0,
+        "out_of_training_mae_kg_ha": 991.0,
+        "history_mae_kg_ha": 1039.1,
+        "difference_vs_history_kg_ha": -65.7,
+        "ci95": [
+          -94.4,
+          -36.7
+        ],
+        "harvests": 1119,
+        "municipalities": 374,
+        "confirmed": true,
+        "outcome": "confirmed"
+      },
+      "regional": []
+    },
+    "maize1": {
+      "national": {
+        "mae_kg_ha": 1375.7,
+        "bias_kg_ha": 429.2,
+        "out_of_training_mae_kg_ha": 1337.4,
+        "history_mae_kg_ha": 1487.9,
+        "difference_vs_history_kg_ha": -112.2,
+        "ci95": [
+          -127.0,
+          -96.2
+        ],
+        "harvests": 2721,
+        "municipalities": 912,
+        "confirmed": true,
+        "outcome": "confirmed"
+      },
+      "regional": []
+    },
+    "wheat": {
+      "national": {
+        "mae_kg_ha": 569.3,
+        "bias_kg_ha": 126.2,
+        "out_of_training_mae_kg_ha": 556.5,
+        "history_mae_kg_ha": 643.6,
+        "difference_vs_history_kg_ha": -74.3,
+        "ci95": [
+          -87.2,
+          -61.2
+        ],
+        "harvests": 1373,
+        "municipalities": 462,
+        "confirmed": true,
+        "outcome": "confirmed"
+      },
+      "regional": []
+    },
+    "rice": {
+      "national": {
+        "mae_kg_ha": 412.4,
+        "bias_kg_ha": -54.9,
+        "out_of_training_mae_kg_ha": 394.3,
+        "history_mae_kg_ha": 427.8,
+        "difference_vs_history_kg_ha": -15.5,
+        "ci95": [
+          -23.3,
+          -7.1
+        ],
+        "harvests": 1819,
+        "municipalities": 628,
+        "confirmed": true,
+        "outcome": "confirmed"
+      },
+      "regional": []
+    },
+    "bean1": {
+      "national": {
+        "mae_kg_ha": 305.4,
+        "bias_kg_ha": 73.9,
+        "out_of_training_mae_kg_ha": 314.2,
+        "history_mae_kg_ha": 322.3,
+        "difference_vs_history_kg_ha": -16.9,
+        "ci95": [
+          -25.4,
+          -8.8
+        ],
+        "harvests": 844,
+        "municipalities": 286,
+        "confirmed": true,
+        "outcome": "confirmed"
+      },
+      "regional": []
+    },
+    "bean2": {
+      "national": {
+        "mae_kg_ha": 308.9,
+        "bias_kg_ha": -96.5,
+        "out_of_training_mae_kg_ha": 348.5,
+        "history_mae_kg_ha": 311.4,
+        "difference_vs_history_kg_ha": -2.5,
+        "ci95": [
+          -12.6,
+          7.3
+        ],
+        "harvests": 628,
+        "municipalities": 218,
+        "confirmed": false,
+        "outcome": "not_confirmed"
+      },
+      "regional": []
+    },
+    "coffee_arabica": {
+      "national": {
+        "mae_kg_ha": 453.6,
+        "bias_kg_ha": -54.5,
+        "out_of_training_mae_kg_ha": 475.5,
+        "history_mae_kg_ha": 426.0,
+        "difference_vs_history_kg_ha": 27.6,
+        "ci95": [
+          21.2,
+          34.6
+        ],
+        "harvests": 925,
+        "municipalities": 309,
+        "confirmed": false,
+        "outcome": "worse_than_history"
+      },
+      "regional": []
+    },
+    "coffee_conilon": {
+      "national": {
+        "mae_kg_ha": 398.1,
+        "bias_kg_ha": -19.8,
+        "out_of_training_mae_kg_ha": 665.1,
+        "history_mae_kg_ha": 888.3,
+        "difference_vs_history_kg_ha": -490.2,
+        "ci95": [
+          -581.3,
+          -401.0
+        ],
+        "harvests": 180,
+        "municipalities": 60,
+        "confirmed": true,
+        "outcome": "confirmed"
+      },
+      "regional": []
+    },
+    "coffee_total_mg": {
+      "national": {
+        "mae_kg_ha": 360.8,
+        "bias_kg_ha": 35.2,
+        "out_of_training_mae_kg_ha": 352.2,
+        "history_mae_kg_ha": 349.6,
+        "difference_vs_history_kg_ha": 11.2,
+        "ci95": [
+          -2.6,
+          25.2
+        ],
+        "harvests": 949,
+        "municipalities": 317,
+        "confirmed": false,
+        "outcome": "not_confirmed"
+      },
+      "regional": []
+    }
+  },
+  "inputs": {
+    "data/processed/training_v7/test_samples.parquet": "3f456d83118fc45608b631a0c862c2168a4e9b94e7e2bbc2d24fece0d414bdf8",
+    "data/processed/training_v6/test_samples.parquet": "fd6ebb4ac4552b947e2ab32fb914b8d54027d53c5edae50d6e3944f62c59edef"
+  }
+}

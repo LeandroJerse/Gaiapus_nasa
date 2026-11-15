@@ -1,0 +1,26 @@
+[
+  {
+    "id": "uberlandia",
+    "label": "Uberlândia",
+    "uf": "31",
+    "ufName": "Minas Gerais",
+    "municipalityCode": "3170206",
+    "directory": "./data"
+  },
+  {
+    "id": "rio-verde",
+    "label": "Rio Verde",
+    "uf": "52",
+    "ufName": "Goiás",
+    "municipalityCode": "5218805",
+    "directory": "./data/regions/rio-verde"
+  },
+  {
+    "id": "barreiras",
+    "label": "Barreiras",
+    "uf": "29",
+    "ufName": "Bahia",
+    "municipalityCode": "2903201",
+    "directory": "./data/regions/barreiras"
+  }
+]

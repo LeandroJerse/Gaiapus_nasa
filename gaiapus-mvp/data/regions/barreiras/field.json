@@ -1,0 +1,846 @@
+{
+  "bounds": {
+    "BR": [
+      [
+        -73.9856,
+        -33.7438
+      ],
+      [
+        -34.8027,
+        5.2673
+      ]
+    ],
+    "MG": [
+      [
+        -46.5599,
+        -18.3372
+      ],
+      [
+        -37.3411,
+        -8.5475
+      ]
+    ],
+    "city": [
+      [
+        -46.4555,
+        -12.4257
+      ],
+      [
+        -44.5798,
+        -11.6054
+      ]
+    ],
+    "field": [
+      [
+        -45.354,
+        -12.204
+      ],
+      [
+        -45.346,
+        -12.196
+      ]
+    ]
+  },
+  "field": {
+    "geojson": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [
+            -45.354,
+            -12.204
+          ],
+          [
+            -45.346,
+            -12.204
+          ],
+          [
+            -45.346,
+            -12.196
+          ],
+          [
+            -45.354,
+            -12.196
+          ],
+          [
+            -45.354,
+            -12.204
+          ]
+        ]
+      ]
+    },
+    "label": "Recorte demonstrativo rural"
+  },
+  "image": {
+    "url": "./data/scene.png",
+    "corners": [
+      [
+        -45.363,
+        -12.189
+      ],
+      [
+        -45.336999999999996,
+        -12.189
+      ],
+      [
+        -45.336999999999996,
+        -12.211
+      ],
+      [
+        -45.363,
+        -12.211
+      ]
+    ],
+    "date": "2024-07-28",
+    "scene_id": "HLS.L30.T23LMG.2024210T130647.v2.0",
+    "collection": "hls2-l30"
+  },
+  "observations": [
+    {
+      "date": "2024-06-02",
+      "acquired_at": "2024-06-02T13:06:24.880412Z",
+      "scene_id": "HLS.L30.T23LMG.2024154T130624.v2.0",
+      "collection": "hls2-l30",
+      "ndvi": null,
+      "valid_fraction": 0.0,
+      "valid_pixels": 0,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-06-02",
+      "acquired_at": "2024-06-02T13:25:41.037570Z",
+      "scene_id": "HLS.S30.T23LMG.2024154T132239.v2.0",
+      "collection": "hls2-s30",
+      "ndvi": null,
+      "valid_fraction": 0.0,
+      "valid_pixels": 0,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-06-07",
+      "acquired_at": "2024-06-07T13:25:45.284380Z",
+      "scene_id": "HLS.S30.T23LMG.2024159T132241.v2.0",
+      "collection": "hls2-s30",
+      "ndvi": 0.6971,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-06-10",
+      "acquired_at": "2024-06-10T13:06:39.552356Z",
+      "scene_id": "HLS.L30.T23LMG.2024162T130639.v2.0",
+      "collection": "hls2-l30",
+      "ndvi": 0.6882,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-06-12",
+      "acquired_at": "2024-06-12T13:25:42.831900Z",
+      "scene_id": "HLS.S30.T23LMG.2024164T132239.v2.0",
+      "collection": "hls2-s30",
+      "ndvi": 0.6799,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-06-17",
+      "acquired_at": "2024-06-17T13:25:45.286280Z",
+      "scene_id": "HLS.S30.T23LMG.2024169T132241.v2.0",
+      "collection": "hls2-s30",
+      "ndvi": 0.6806,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-06-22",
+      "acquired_at": "2024-06-22T13:25:42.229270Z",
+      "scene_id": "HLS.S30.T23LMG.2024174T132239.v2.0",
+      "collection": "hls2-s30",
+      "ndvi": 0.6715,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-06-26",
+      "acquired_at": "2024-06-26T13:06:23.889186Z",
+      "scene_id": "HLS.L30.T23LMG.2024178T130623.v2.0",
+      "collection": "hls2-l30",
+      "ndvi": 0.6584,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-06-27",
+      "acquired_at": "2024-06-27T13:25:42.287060Z",
+      "scene_id": "HLS.S30.T23LMG.2024179T132241.v2.0",
+      "collection": "hls2-s30",
+      "ndvi": 0.6635,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-07-02",
+      "acquired_at": "2024-07-02T13:25:43.427970Z",
+      "scene_id": "HLS.S30.T23LMG.2024184T132239.v2.0",
+      "collection": "hls2-s30",
+      "ndvi": 0.6518,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-07-04",
+      "acquired_at": "2024-07-04T13:06:40.037961Z",
+      "scene_id": "HLS.L30.T23LMG.2024186T130640.v2.0",
+      "collection": "hls2-l30",
+      "ndvi": 0.6475,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-07-07",
+      "acquired_at": "2024-07-07T13:25:43.074260Z",
+      "scene_id": "HLS.S30.T23LMG.2024189T132241.v2.0",
+      "collection": "hls2-s30",
+      "ndvi": 0.6511,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-07-12",
+      "acquired_at": "2024-07-12T13:06:45.426558Z",
+      "scene_id": "HLS.L30.T23LMG.2024194T130645.v2.0",
+      "collection": "hls2-l30",
+      "ndvi": 0.6321,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-07-12",
+      "acquired_at": "2024-07-12T13:25:41.686710Z",
+      "scene_id": "HLS.S30.T23LMG.2024194T132239.v2.0",
+      "collection": "hls2-s30",
+      "ndvi": 0.6376,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-07-17",
+      "acquired_at": "2024-07-17T13:25:40.505830Z",
+      "scene_id": "HLS.S30.T23LMG.2024199T132231.v2.0",
+      "collection": "hls2-s30",
+      "ndvi": 0.6303,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-07-20",
+      "acquired_at": "2024-07-20T13:06:55.546922Z",
+      "scene_id": "HLS.L30.T23LMG.2024202T130655.v2.0",
+      "collection": "hls2-l30",
+      "ndvi": 0.6144,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-07-22",
+      "acquired_at": "2024-07-22T13:25:42.986580Z",
+      "scene_id": "HLS.S30.T23LMG.2024204T132239.v2.0",
+      "collection": "hls2-s30",
+      "ndvi": null,
+      "valid_fraction": 0.2747,
+      "valid_pixels": 231,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-07-27",
+      "acquired_at": "2024-07-27T13:25:42.212000Z",
+      "scene_id": "HLS.S30.T23LMG.2024209T132241.v2.0",
+      "collection": "hls2-s30",
+      "ndvi": 0.6094,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    },
+    {
+      "date": "2024-07-28",
+      "acquired_at": "2024-07-28T13:06:47.877177Z",
+      "scene_id": "HLS.L30.T23LMG.2024210T130647.v2.0",
+      "collection": "hls2-l30",
+      "ndvi": 0.5978,
+      "valid_fraction": 1.0,
+      "valid_pixels": 841,
+      "field_pixels": 841,
+      "rain_7d_mm": 0.0
+    }
+  ],
+  "rainfall": [
+    {
+      "date": "2024-06-01",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-02",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-03",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-04",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-05",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-06",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-07",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-08",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-09",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-10",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-11",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-12",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-13",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-14",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-15",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-16",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-17",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-18",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-19",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-20",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-21",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-22",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-23",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-24",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-25",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-26",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-27",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-28",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-29",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-30",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-01",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-02",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-03",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-04",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-05",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-06",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-07",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-08",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-09",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-10",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-11",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-12",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-13",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-14",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-15",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-16",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-17",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-18",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-19",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-20",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-21",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-22",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-23",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-24",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-25",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-26",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-27",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-28",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-29",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-30",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-31",
+      "rain_mm": 0.0
+    }
+  ],
+  "sources": {
+    "stac": "https://planetarycomputer.microsoft.com/api/stac/v1",
+    "imagery": "NASA HLS v2 / Microsoft Planetary Computer",
+    "rain": "NASA POWER / IMERG_PRECTOT",
+    "rain_query_point": [
+      -45.349999999999994,
+      -12.2
+    ],
+    "rain_sha256": "03eb975793078ae6029130745e0274f5b6c6060396ce7c1dc4ed75838c6816e2",
+    "rain_validation": "Comparada com a distribui\u00e7\u00e3o di\u00e1ria IMERG Final V07B; n\u00e3o calibrada em campo.",
+    "boundary": "IBGE API Malhas v4",
+    "ndvi_min_fraction": 0.65,
+    "weather_scope": "Estimativa da c\u00e9lula IMERG de 0,1\u00b0 associada ao ponto de consulta (centro do recorte)."
+  },
+  "validation": {
+    "status": "validated",
+    "min_valid_fraction": 0.65,
+    "accepted_scenes": 16,
+    "total_scenes": 19,
+    "valid_dates": 15,
+    "scope": "demo_product_quality",
+    "rain_crosscheck": {
+      "region": "barreiras",
+      "start": "2024-06-01",
+      "end": "2024-07-31",
+      "expected_days": 61,
+      "product": "IMERG daily Final V07B",
+      "cell_center": [
+        -45.35,
+        -12.15
+      ],
+      "tolerance_mm": 0.02,
+      "ground_check": "not_checked",
+      "reference_sha256": "634684acd24d14a310fccba5e7e08ed3f5a6af39215e148666a5853b6b2c9c7c",
+      "matched_days": 61,
+      "missing_power": [],
+      "missing_reference": [],
+      "mismatched_days": 0,
+      "mismatched_dates": [],
+      "mae_mm": 0.0,
+      "bias_mm": 0.0,
+      "max_abs_mm": 0.0,
+      "status": "complete_match"
+    }
+  },
+  "reference_rainfall": [
+    {
+      "date": "2024-06-01",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-02",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-03",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-04",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-05",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-06",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-07",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-08",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-09",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-10",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-11",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-12",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-13",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-14",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-15",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-16",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-17",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-18",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-19",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-20",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-21",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-22",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-23",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-24",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-25",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-26",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-27",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-28",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-29",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-06-30",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-01",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-02",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-03",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-04",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-05",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-06",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-07",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-08",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-09",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-10",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-11",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-12",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-13",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-14",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-15",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-16",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-17",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-18",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-19",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-20",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-21",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-22",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-23",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-24",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-25",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-26",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-27",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-28",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-29",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-30",
+      "rain_mm": 0.0
+    },
+    {
+      "date": "2024-07-31",
+      "rain_mm": 0.0
+    }
+  ]
+}

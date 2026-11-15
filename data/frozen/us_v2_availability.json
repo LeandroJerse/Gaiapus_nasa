@@ -1,0 +1,82 @@
+{
+  "version": "us_v2_availability_2026-11-15",
+  "rule": "A value may enter a row issued at issued_at only if available_at <= issued_at (UTC date). Unknown availability means not available.",
+  "status_vocabulary": {
+    "confirmed": "official page states the date and the crop year",
+    "confirmed_date_inferred_crop_year": "official calendar states the date; crop year inferred from the release cycle",
+    "planned_official": "official notice states a planned date; actual posting not verified",
+    "estimated": "no official per-year date; conservative date from an official description of the usual release window",
+    "not_published": "official source states the series does not exist for that crop year",
+    "unknown": "not published as of 2026-11-15 or no evidence; treated as unavailable"
+  },
+  "nass_county_estimates": {
+    "maize|soy": [
+      {"crop_years": [1990, 2022], "available_at": "{Y+1}-05-15", "status": "estimated",
+       "basis": "Historical row-crop county estimates released between late February and mid-May of the following year; mid-May used as conservative bound",
+       "url": "https://www.nass.usda.gov/Surveys/Guide_to_NASS_Surveys/County_Agricultural_Production/index.php"},
+      {"crop_years": [2023, 2023], "available_at": "2024-02-23", "status": "confirmed",
+       "url": "https://www.nass.usda.gov/Statistics_by_State/Iowa/Publications/County_Estimates/index.php"},
+      {"crop_years": [2024, 2024], "available_at": "2025-05-06", "status": "planned_official",
+       "basis": "Reinstatement notice: row crops effective 2024 crop season, county estimates scheduled May 6, 2025",
+       "url": "https://data.nass.usda.gov/Newsroom/Notices/2025/03-19-2025.php"},
+      {"crop_years": [2025, 2025], "available_at": "2026-05-05", "status": "confirmed_date_inferred_crop_year",
+       "url": "https://www.nass.usda.gov/Publications/Reports_by_Release_Day/"},
+      {"crop_years": [2026, 2100], "available_at": null, "status": "unknown",
+       "basis": "No 2027 release date officially published as of 2026-11-15; expected cycle is not a confirmed date"}
+    ],
+    "wheat_winter": [
+      {"crop_years": [1990, 2022], "available_at": "{Y}-12-31", "status": "estimated",
+       "basis": "Historical small-grain county estimates released in December of the crop year; Dec 31 used as conservative bound",
+       "url": "https://www.nass.usda.gov/Surveys/Guide_to_NASS_Surveys/County_Agricultural_Production/index.php"},
+      {"crop_years": [2023, 2023], "available_at": "2023-12-15", "status": "confirmed",
+       "url": "https://www.nass.usda.gov/Statistics_by_State/Kansas/Publications/County_Estimates/index.php"},
+      {"crop_years": [2024, 2024], "available_at": null, "status": "not_published",
+       "basis": "County estimates discontinued April 2024; small grains reinstated only from the 2025 crop season",
+       "url": "https://data.nass.usda.gov/Newsroom/Notices/2025/03-19-2025.php"},
+      {"crop_years": [2025, 2025], "available_at": "2026-03-05", "status": "confirmed",
+       "basis": "December 2025 release postponed by lapse in appropriations; released March 5, 2026 15:00 ET in Quick Stats",
+       "url": "https://data.nass.usda.gov/Newsroom/Notices/2025/11-19-2025.php"},
+      {"crop_years": [2026, 2026], "available_at": "2026-12-18", "status": "confirmed_date_inferred_crop_year",
+       "basis": "Calendar lists County Estimates Winter Wheat on 2026-12-18; future relative to 2026-11-15, so unavailable to every issue before that date",
+       "url": "https://www.nass.usda.gov/Publications/Reports_by_Release_Day/"},
+      {"crop_years": [2027, 2100], "available_at": null, "status": "unknown"}
+    ]
+  },
+  "nass_county_practice_split": {
+    "scope": "NE maize/soy and KS winter wheat IRRIGATED / NON-IRRIGATED county yield and area",
+    "last_crop_year": {"NE": 2018, "KS": 2019},
+    "available_at": "same rule as nass_county_estimates for the crop year",
+    "basis": "Practice breakdown discontinued from the 2019 crop season (NE observed last 2018 in extract; KS extract shows 2019)",
+    "url": "https://www.nass.usda.gov/Newsroom/Notices/2020/02-13-2020.php"
+  },
+  "nass_crop_progress": {
+    "available_at": "week_ending + 1 day (first business day, 16:00 ET)",
+    "status": "confirmed rule; historical per-report timestamps not in the bulk file",
+    "level": "STATE (district availability in Quick Stats not confirmed); never a county observation",
+    "url": "https://www.nass.usda.gov/Surveys/Guide_to_NASS_Surveys/Crop_Progress_and_Condition/index.php"
+  },
+  "census_of_agriculture": {
+    "2017": {"available_at": "2019-04-11", "status": "confirmed", "url": "https://www.usda.gov/about-usda/news/press-releases/2019/04/11/2017-census-agriculture-data-now-available"},
+    "2022": {"available_at": "2024-02-13", "status": "confirmed", "url": "https://www.nass.usda.gov/Newsroom/2024/02-13-2024.php"},
+    "note": "Not extracted in v2 (SURVEY-only stream); listed for a future irrigation experiment"
+  },
+  "cdl": {
+    "rule": "CDL year Y available_at = {Y+1}-03-01 (estimated) unless confirmed below; first year IA 2000, NE 2001, KS 2006",
+    "confirmed": {"2024": "2025-02-27", "2025": "2026-02-27"},
+    "use": "previous-year mask is a proxy for the crop area of the target year, never the planted area of that year",
+    "urls": ["https://www.nass.usda.gov/Research_and_Science/Cropland/metadata/metadata_CDL24_FGDC-STD-001-1998.htm",
+             "https://www.nass.usda.gov/Research_and_Science/Cropland/metadata/meta.php"]
+  },
+  "nasa_power_daily": {
+    "historical_available_at": "unknown (current revised snapshot); retrospective reconstruction only",
+    "measured_latency_2026-11-14": {"PRECTOTCORR": 1, "T2M_MIN": 1, "T2M_MAX": 1, "RH2M": 1, "WS2M": 1, "ALLSKY_SFC_SW_DWN": 75},
+    "latency_unit": "days between last valid date and retrieval end date in the 2026-11-14 retrieval",
+    "revision": "Recent days come from GEOS-IT and are overwritten when MERRA-2 arrives (every few months); days within ~60 days of retrieval are provisional",
+    "url": "https://power.larc.nasa.gov/docs/methodology/data/sources_meteorology/"
+  },
+  "gridmet": {
+    "available_at": "next day; last 60 days preliminary",
+    "historical_available_at": "unknown (current revised snapshot; 2022-08-01..2024-03-01 reprocessed in 2024-09)",
+    "url": "https://www.climatologylab.org/gridmet.html"
+  }
+}

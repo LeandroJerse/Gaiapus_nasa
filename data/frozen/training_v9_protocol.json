@@ -1,0 +1,19 @@
+{
+  "version": "training_v9",
+  "registered_before_any_v9_score": true,
+  "purpose": "candidates for the v9 prospective registry (data/frozen/prospective_v9_protocol.json); approval only through prospective scoring",
+  "development_data": "all published harvests in the local cohorts (v6/v7 samples <= 2021 plus the opened 2022-2024 test samples); the prospective targets are harvests whose PAM does not exist yet, so none of these years is a confirmation set",
+  "inputs": "training features from NASA POWER with IMERG Final and CERES (as v7/v8); prospective predictions use the operational sources of the live job; the shift is measured separately (v9 plan section 2) and not corrected here",
+  "scopes": {
+    "soy": [["national", null, "national"], ["MG+MT", ["31", "51"], "scope"]],
+    "maize2": [["national", null, "national"], ["MG+MT", ["31", "51"], "scope"]],
+    "maize1": [["national", null, "national"]], "wheat": [["national", null, "national"]], "rice": [["national", null, "national"]],
+    "bean1": [["national", null, "national"]], "bean2": [["national", null, "national"]],
+    "coffee_arabica": [["MG", ["31"], "scope"]], "coffee_total_mg": [["MG", ["31"], "scope"]], "coffee_conilon": [["ES", ["32"], "scope"]]
+  },
+  "candidates": "same grid as v8 (data/frozen/training_v8_protocol.json): bases, feature sets F1/F2/F3(/F3_no_latlon), Ridge alphas, HGB grid, MLP grid with early stopping, shrinkage 0-1",
+  "selection": "train_v8.select on all development rows of the pool: internal validation = the last two harvests (2023-2024), internal fit = harvests <= 2021 (publication gap); score on the scope rows, MG+MT 50% per state",
+  "registered_candidates": "for every crop x scope, the best internal-validation candidate of each learner family (ridge, hgb, mlp), refitted on all development rows; up to 3 candidates per scope; MLPs on CUDA with seeds 101-105, exported and checked on CPU",
+  "multiple_comparisons": "approval uses Holm adjustment across the candidates of the same crop x scope (prospective protocol)",
+  "no_reselection": "candidates are frozen when added to the prospective protocol; no candidate is replaced after its first prospective record"
+}
